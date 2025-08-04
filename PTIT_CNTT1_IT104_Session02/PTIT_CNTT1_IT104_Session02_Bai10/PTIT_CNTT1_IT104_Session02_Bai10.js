@@ -2,15 +2,20 @@ class ProductDetail {
     constructor(product) {
         this.name = product.name;
         this.quantity = product.quantity;
-        this.lastPrice = product.price - (product.price * product.discount);
-        this.subTotal = (product.price - (product.price * product.discount)) * product.quantity;
+
+        let discount = product.discount || 0; // vì tổng discount của sản phẩm với bulkDIscount có thể > 1 --> dẫn đến lastPrice có thể âm
+        if (product.bulkDiscount && product.quantity >= product.bulkDiscount.minQuantity) {
+            discount += product.bulkDiscount.extraDiscount || 0;
+        }
+        this.lastPrice = product.price * (1 - discount);
+        this.subTotal = this.lastPrice * product.quantity;
     }
 }
 
 const products = [
-    { name: "A", price: 100, discount: 0.1, quantity: 2 },
-    { name: "B", price: 200, discount: 0.2, quantity: 1, bulkDiscount: { minQuantity: 2, extraDiscount: 0.05 } },
-    { name: "C", price: 300, discount: 0, quantity: 3, bulkDiscount: { minQuantity: 3, extraDiscount: 0.1 } },
+    { name: "A", price: 150, discount: 0.35, quantity: 2 },
+    { name: "B", price: 200, discount: 0.24, quantity: 1, bulkDiscount: { minQuantity: 2, extraDiscount: 0.05 } },
+    { name: "C", price: 300, discount: 0.1, quantity: 3, bulkDiscount: { minQuantity: 3, extraDiscount: 0.1 } },
 ];
 
 const getOrderSummary = (products) => {
