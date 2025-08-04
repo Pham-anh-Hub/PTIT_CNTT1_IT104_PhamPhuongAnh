@@ -1,7 +1,7 @@
 const typeConsole = (type = "log") => {
-    return `Đây là type: ${type}`;
+    console[type]("Đây là type: ", type);
 }
 
-console.log(typeConsole());
-console.log(typeConsole("error"));
-console.log(typeConsole("warn"));
+typeConsole();
+typeConsole("error");
+typeConsole("warn");
