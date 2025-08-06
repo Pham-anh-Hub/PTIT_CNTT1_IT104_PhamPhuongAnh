@@ -1,0 +1,20 @@
+{
+  "name": "frontend_react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pham-anh-Hub/PTIT_CNTT1_IT104_Session01_PhamPhuongAnh.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pham-anh-Hub/PTIT_CNTT1_IT104_Session01_PhamPhuongAnh/issues"
+  },
+  "homepage": "https://github.com/Pham-anh-Hub/PTIT_CNTT1_IT104_Session01_PhamPhuongAnh#readme"
+}

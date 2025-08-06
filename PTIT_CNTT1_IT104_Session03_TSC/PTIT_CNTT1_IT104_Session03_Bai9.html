@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculation</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-para">
+        <input id="input1" class="input" type="text" name="parameter" />
+        <input id="input2" class="input" type="text" name="parameter" />
+        <span style="align-self: center; width: 2vw; height: 2vw">=</span>
+        <input id="result" class="result" type="text" name="parameter" />
+      </div>
+      <div class="calculation">
+        <button id="sum" type="button">+</button>
+        <button id="subtract" type="button">-</button>
+        <button id="multi" type="button">*</button>
+        <button id="divide" type="button">/</button>
+        <button id="pow" type="button">pow</button>
+        <button id="sqrt" type="button">sprt</button>
+        <button id="fac" type="button">fac</button>
+      </div>
+      <span style="font-size: 15px"
+        >* Chỉ nhập 1 số đầu tiên khi cần tính giai thừa</span
+      >
+    </div>
+
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 1vw;
+        border: 1px solid #dadada;
+        width: fit-content;
+        padding: 1vw;
+      }
+      .input-para {
+        display: flex;
+        justify-content: center;
+        gap: 1vw;
+        align-items: center;
+      }
+      .input-para .input,
+      .result {
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        color: gray;
+        border: 1px solid #dadada;
+      }
+      .input-para .input:focus {
+        outline: none;
+      }
+      .calculation {
+        padding: 10px auto;
+      }
+      .calculation button {
+        width: 45px;
+        height: 45px;
+        text-align: center;
+        color: gray;
+        border: 1px solid #dadada;
+        cursor: pointer;
+      }
+      .calculation button:hover {
+        background-color: #dadada;
+      }
+    </style>
+    <script src="./dist/PTIT_CNTT1_IT104_Session03_Bai9.js"></script>
+  </body>
+</html>
