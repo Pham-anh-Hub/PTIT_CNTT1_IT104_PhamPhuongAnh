@@ -13,8 +13,8 @@ abstract class Job {
 
 class PartimeJob extends Job {
   workingHour: number;
-  constructor(type: string = "Part-time", workingHour: number) {
-    super(type);
+  constructor(workingHour: number) {
+    super("Part-time");
     this.workingHour = workingHour;
   }
   calculateSalary(): number {
@@ -23,18 +23,16 @@ class PartimeJob extends Job {
 }
 
 class FulltimeJob extends Job {
-  workingHour: number;
-  constructor(type: string = "Fulltime", workingHour: number) {
-    super(type);
-    this.workingHour = workingHour;
+  constructor() {
+    super("Fulltime");
   }
   calculateSalary(): number {
     return 10000000;
   }
 }
 
-const newPartimeJob = new PartimeJob("Part-time", 4);
-const newFulltimeJob = new FulltimeJob("Fulltime", 5);
+const newPartimeJob = new PartimeJob(4);
+const newFulltimeJob = new FulltimeJob();
 
 newPartimeJob.printType();
 console.log(`Lương: ${newPartimeJob.calculateSalary()}`);
