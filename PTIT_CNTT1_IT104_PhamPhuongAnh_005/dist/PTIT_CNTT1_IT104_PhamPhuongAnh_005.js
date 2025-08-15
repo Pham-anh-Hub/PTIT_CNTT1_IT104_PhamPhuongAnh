@@ -191,10 +191,9 @@ do {
                 alert("Dữ liệu trống, mời thêm lại !");
             }
             console.log(newLibrary.members);
-            alert("Them moi thanh cong !!");
+            alert("Thêm mới thành công !!");
             break;
         case 2:
-            console.log("Them tai lieu");
             const itemChoice = Number(prompt("1. Thêm sách\n2. Thêm tạp chí"));
             if (itemChoice === 1) {
                 let quantityItem = newLibrary.items.length;
