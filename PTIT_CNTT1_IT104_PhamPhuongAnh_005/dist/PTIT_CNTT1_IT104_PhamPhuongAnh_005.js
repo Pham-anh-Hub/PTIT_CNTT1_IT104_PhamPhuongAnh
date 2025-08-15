@@ -66,6 +66,7 @@ class Loan {
         this.item = item;
         this.dueDate = dueDate;
         this.isReturned = isReturned;
+        this.totalLateFee = 0;
     }
     getDetails() {
         return `Thông tin lượt mượn: \nMã lượt mượn: ${this.loanId}\nThành viên mượn: ${this.member}\nTài liệu mượn: ${this.item}\nHạn trả: ${this.dueDate}\nTrạng thái: ${this.isReturned ? "Đã trả" : "Chưa trả"}`;
@@ -90,7 +91,7 @@ class Library {
         const memberLoan = this.members.find((member) => member.memberId === memberId);
         if (memberLoan) {
             const targetItem = this.items.find((item) => item.id === itemId);
-            if (targetItem) {
+            if (targetItem && targetItem.isAvailable) {
                 const dueToDate = String(prompt("Nhập hạn trả tài liệu: "));
                 targetItem.isAvailable = false;
                 const newLoan = new Loan(quantityLoans += 1, memberLoan, targetItem, dueToDate, false);
@@ -106,16 +107,24 @@ class Library {
     }
     returnItem(itemId) {
         const targetLoan = this.loans.find((loan) => loan.item.id === itemId);
-        if (targetLoan) {
+        if (!targetLoan) {
+            console.log("Không tìm thấy tài liệu cần mượn");
+            return 0;
+        }
+        else {
             targetLoan.isReturned = true;
             targetLoan.item.isAvailable = true;
             const timeLoan = Number(prompt(`Nhập số ngày đã mượn ${targetLoan.item.title}: `));
             if (timeLoan > targetLoan.item.getLoanPeriod()) {
-                const feeForLate = targetLoan.item.calculateLateFee(timeLoan - targetLoan.item.getLoanPeriod());
-                return feeForLate;
+                const fee = targetLoan.item.calculateLateFee(timeLoan - targetLoan.item.getLoanPeriod());
+                targetLoan.totalLateFee = fee;
+                return fee;
+            }
+            else {
+                targetLoan.totalLateFee = 0;
+                return 0;
             }
         }
-        return 0;
     }
     listAvailableItems() {
         const availableItems = this.items.filter((item) => item.isAvailable);
@@ -131,29 +140,23 @@ class Library {
         if (memberLoans.length > 0) {
             console.log("Các tài liệu thanh viên đã mượn: ");
             memberLoans.forEach(loan => {
-                console.log(loan.item);
+                console.log(`${loan.item.getItemType()} - ${loan.item.title} `);
             });
         }
     }
     calculateTotalLateFees() {
-        let totalLateFee = 0;
-        this.loans.forEach(loan => {
-            if (typeof loan.item.returnItem() == "number") {
-                const fee = Number(loan.item.returnItem());
-                totalLateFee += fee;
-            }
-        });
+        let totalLateFee = this.loans.reduce((total, loan) => total + loan.totalLateFee, 0);
         return totalLateFee;
     }
     getItemTypeCount() {
         const bookItems = this.items.filter((item) => item.getItemType().toLowerCase() === "sách");
         const magazineItems = this.items.filter((item) => item.getItemType().toLowerCase() === "tạp chí");
-        console.log(`Số lượng sách: ${bookItems} cuốn
-            Số lượng tạp chí: ${magazineItems} cuốn`);
+        console.log(`Số lượng sách: ${bookItems.length} cuốn
+            Số lượng tạp chí: ${magazineItems.length} cuốn`);
     }
     updateItemTitle(itemId, newTitle) {
         const targetIndex = this.items.findIndex((item) => item.id == itemId);
-        if (targetIndex) {
+        if (targetIndex !== -1) {
             this.items[targetIndex].title = newTitle;
         }
         else {
@@ -187,8 +190,11 @@ do {
             else {
                 alert("Dữ liệu trống, mời thêm lại !");
             }
+            console.log(newLibrary.members);
+            alert("Them moi thanh cong !!");
             break;
         case 2:
+            console.log("Them tai lieu");
             const itemChoice = Number(prompt("1. Thêm sách\n2. Thêm tạp chí"));
             if (itemChoice === 1) {
                 let quantityItem = newLibrary.items.length;
@@ -206,6 +212,7 @@ do {
                     newLibrary.addItem(newMagazine);
                 }
             }
+            console.log(newLibrary.items);
             alert("Thêm mới thành công !!");
             break;
         case 3:
@@ -245,6 +252,7 @@ do {
             alert("Hẹn gặp lại !!");
             break;
         default:
+            alert("Lựa chọn không hợp lệ !");
             break;
     }
 } while (yourChoice !== 11);

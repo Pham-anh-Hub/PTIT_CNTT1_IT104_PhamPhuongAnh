@@ -92,12 +92,14 @@ class Loan {
     item: LibraryItem;
     dueDate: string;
     isReturned: boolean;
+    totalLateFee: number;
     constructor(loanId: number, member: Member, item: LibraryItem, dueDate: string, isReturned: boolean) {
         this.loanId = loanId;
         this.member = member;
         this.item = item;
         this.dueDate = dueDate;
         this.isReturned = isReturned;
+        this.totalLateFee = 0;
     }
     getDetails(): string {
         return `Thông tin lượt mượn: \nMã lượt mượn: ${this.loanId}\nThành viên mượn: ${this.member}\nTài liệu mượn: ${this.item}\nHạn trả: ${this.dueDate}\nTrạng thái: ${this.isReturned ? "Đã trả" : "Chưa trả"}`
@@ -130,7 +132,7 @@ class Library {
         const memberLoan = this.members.find((member: Member) => member.memberId === memberId);
         if (memberLoan) {
             const targetItem = this.items.find((item: LibraryItem) => item.id === itemId);
-            if (targetItem) {
+            if (targetItem && targetItem.isAvailable) {
                 const dueToDate: string = String(prompt("Nhập hạn trả tài liệu: "));
                 targetItem.isAvailable = false;
                 const newLoan = new Loan(quantityLoans += 1, memberLoan, targetItem, dueToDate, false);
@@ -146,16 +148,24 @@ class Library {
 
     returnItem(itemId: number): number {
         const targetLoan = this.loans.find((loan: Loan) => loan.item.id === itemId);
-        if (targetLoan) {
+        if (!targetLoan) {
+            console.log("Không tìm thấy tài liệu cần mượn");
+            return 0;
+        } else {
             targetLoan.isReturned = true;
             targetLoan.item.isAvailable = true;
             const timeLoan = Number(prompt(`Nhập số ngày đã mượn ${targetLoan.item.title}: `));
             if (timeLoan > targetLoan.item.getLoanPeriod()) {
-                const feeForLate = targetLoan.item.calculateLateFee(timeLoan - targetLoan.item.getLoanPeriod());
-                return feeForLate;
+                const fee = targetLoan.item.calculateLateFee(timeLoan - targetLoan.item.getLoanPeriod());
+                targetLoan.totalLateFee = fee;
+                return fee;
+            } else {
+                targetLoan.totalLateFee = 0;
+                return 0;
             }
+
         }
-        return 0;
+
     }
 
 
@@ -174,19 +184,13 @@ class Library {
         if (memberLoans.length > 0) {
             console.log("Các tài liệu thanh viên đã mượn: ");
             memberLoans.forEach(loan => {
-                console.log(loan.item);
+                console.log(`${loan.item.getItemType()} - ${loan.item.title} `);
             });
         }
     }
 
     calculateTotalLateFees(): number {
-        let totalLateFee = 0;
-        this.loans.forEach(loan => {
-            if (typeof loan.item.returnItem() == "number") {
-                const fee = Number(loan.item.returnItem());
-                totalLateFee += fee;
-            }
-        });
+        let totalLateFee = this.loans.reduce((total, loan) => total + loan.totalLateFee, 0);
         return totalLateFee;
     }
 
@@ -194,13 +198,13 @@ class Library {
     getItemTypeCount(): void {
         const bookItems = this.items.filter((item: LibraryItem) => item.getItemType().toLowerCase() === "sách");
         const magazineItems = this.items.filter((item: LibraryItem) => item.getItemType().toLowerCase() === "tạp chí");
-        console.log(`Số lượng sách: ${bookItems} cuốn
-            Số lượng tạp chí: ${magazineItems} cuốn`);
+        console.log(`Số lượng sách: ${bookItems.length} cuốn
+            Số lượng tạp chí: ${magazineItems.length} cuốn`);
     }
 
     updateItemTitle(itemId: number, newTitle: string): void {
         const targetIndex = this.items.findIndex((item: LibraryItem) => item.id == itemId);
-        if (targetIndex) {
+        if (targetIndex !== -1) {
             this.items[targetIndex].title = newTitle;
         } else {
             alert("Không tìm thấy tài liệu cần cập nhật");
@@ -238,11 +242,16 @@ do {
             const newContact = String(prompt("Nhập liên hệ (phone | email): "))
             if (newName && newContact) {
                 newLibrary.addMember(newName, newContact);
+
             } else {
                 alert("Dữ liệu trống, mời thêm lại !");
             }
+            console.log(newLibrary.members);
+            alert("Them moi thanh cong !!")
             break;
         case 2:
+            console.log("Them tai lieu");
+
             const itemChoice = Number(prompt("1. Thêm sách\n2. Thêm tạp chí"));
             if (itemChoice === 1) {
                 let quantityItem = newLibrary.items.length;
@@ -250,6 +259,8 @@ do {
                 const newAuthor = String(prompt("Nhập tên tác giả: "));
                 const newBook = new Book(quantityItem += 1, newTitle, newAuthor);
                 newLibrary.addItem(newBook);
+
+
             } else if (itemChoice === 2) {
                 let quantityItem = newLibrary.items.length;
                 const issueNumber = Number(prompt("Nhập số kỳ phát hành: "));
@@ -259,6 +270,7 @@ do {
                     newLibrary.addItem(newMagazine);
                 }
             }
+            console.log(newLibrary.items);
             alert("Thêm mới thành công !!");
             break;
         case 3:
@@ -299,6 +311,7 @@ do {
             alert("Hẹn gặp lại !!");
             break;
         default:
+            alert("Lựa chọn không hợp lệ !")
             break;
     }
 
