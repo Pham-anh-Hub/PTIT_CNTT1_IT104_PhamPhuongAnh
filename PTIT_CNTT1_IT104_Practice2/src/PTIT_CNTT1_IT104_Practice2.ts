@@ -219,8 +219,42 @@ class AirlineManager {
 
     }
 
+    // Tính tổng doanh thu
+    calculateTotalRevenue(): number {
+        return this.bookingRepo.getAll().reduce((sum, booking) => sum + booking.totalCost, 0);
+    }
 
+    // Đếm số lượng chuyến bay nội địa/quốc tế
+    countFlights(): { domestic: number, international: number } {
+        let domestic = 0;
+        let international = 0;
 
+        for (const flight of this.flightRepo.getAll()) {
+            if (flight.constructor.name === "DomesticFlight") domestic++;
+            else if (flight.constructor.name === "InternationalFlight") international++;
+        }
+
+        return { domestic, international };
+    }
+
+    // Cập nhật giờ bay
+    updateFlightTime(flightNumber: string, newTime: Date): void {
+        const targetFlight = this.flightRepo.find(f => f.flightNumber === flightNumber);
+        if (targetFlight) {
+            targetFlight.departureTime = newTime;
+            alert("Cập nhật giờ bay thành công!");
+        } else {
+            alert("Không tìm thấy chuyến bay!");
+        }
+    }
+
+    // Danh sách hành khách của một chuyến bay
+    listPassengersOfFlight(flightNumber: string): void {
+        const passengers = this.bookingRepo.getAll()
+            .filter(b => b.flight.flightNumber === flightNumber)
+            .map(b => b.passenger);
+        console.log("Danh sách hành khách của chuyến bay: ", passengers);
+    }
 
 }
 
@@ -232,5 +266,79 @@ const bookingRepo = new GenericRepository<Booking>([]);     // ban đầu chưa 
 
 let newAirlineManager = new AirlineManager(flightRepo, passengerRepo, bookingRepo);
 do {
-    choice = Number(prompt)
-} while (choice);
+    choice = Number(prompt(`1. Thêm hành khách mới
+2. Thêm chuyến bay mới
+3. Tạo giao dịch đặt vé
+4. Hủy giao dịch đặt vé
+5. Hiển thị danh sách chuyến bay còn trống theo điểm đi và đến
+6. Hiển thị danh sách vé đã đặt của một hành khách
+7. Tính tổng doanh thu của hãng
+8. Đếm số lượng chuyến bay nội địa/quốc tế
+9. Cập nhật giờ bay
+10. Xem danh sách hành khách của một chuyến bay
+11. Thoát chương trìn
+`))
+    switch (choice) {
+        case 1:
+            let name = prompt("Nhập tên hành khách:");
+            let passport = prompt("Nhập số hộ chiếu:");
+            newAirlineManager.addPassenger(name!, passport!);
+            break;
+        case 2:
+            let flightNumber = prompt("Nhập số hiệu chuyến bay:");
+            let origin = prompt("Nhập điểm đi:");
+            let destination = prompt("Nhập điểm đến:");
+            let time = new Date(prompt("Nhập thời gian khởi hành (yyyy-mm-dd hh:mm):")!);
+            let capacity = Number(prompt("Nhập sức chứa:"));
+            let type = prompt("Chọn loại chuyến bay (domestic/international):");
+            let flight: Flight;
+            if (type === "domestic") {
+                flight = new DomesticFlight(flightNumber!, origin!, destination!, time, capacity, 0);
+            } else {
+                flight = new InternationalFlight(flightNumber!, origin!, destination!, time, capacity, 0);
+            }
+            newAirlineManager.addFlight(flight);
+            break;
+        case 3:
+            let passengerId = Number(prompt("Nhập ID hành khách:"));
+            let flightNo = prompt("Nhập số hiệu chuyến bay:");
+            let tickets = Number(prompt("Nhập số lượng vé:"));
+            newAirlineManager.createBooking(passengerId, flightNo!, tickets);
+            break;
+        case 4:
+            let bookingId = Number(prompt("Nhập mã giao dịch cần hủy:"));
+            newAirlineManager.cancelBooking(bookingId);
+            break;
+        case 5:
+            let ori = prompt("Nhập điểm đi:");
+            let des = prompt("Nhập điểm đến:");
+            newAirlineManager.listAvailableFlights(ori!, des!);
+            break;
+        case 6:
+            let pId = Number(prompt("Nhập ID hành khách:"));
+            newAirlineManager.listBookingsByPassenger(pId);
+            break;
+        case 7:
+            console.log("Tổng doanh thu: ", newAirlineManager.calculateTotalRevenue());
+            break;
+        case 8:
+            let count = newAirlineManager.countFlights();
+            console.log(`Số chuyến bay nội địa: ${count.domestic}, quốc tế: ${count.international}`);
+            break;
+        case 9:
+            let fNum = prompt("Nhập số hiệu chuyến bay cần cập nhật:");
+            let newTime = new Date(prompt("Nhập thời gian khởi hành mới (yyyy-mm-dd hh:mm):")!);
+            newAirlineManager.updateFlightTime(fNum!, newTime);
+            break;
+        case 10:
+            let fNumber = prompt("Nhập số hiệu chuyến bay:");
+            newAirlineManager.listPassengersOfFlight(fNumber!);
+            break;
+        case 11:
+            alert("Thoát chương trình!");
+            break;
+        default:
+            alert("Lựa chọn không hợp lệ!");
+            break;
+    }
+} while (choice !== 11);
