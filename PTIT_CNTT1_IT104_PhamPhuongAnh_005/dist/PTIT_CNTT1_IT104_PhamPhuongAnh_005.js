@@ -255,6 +255,3 @@ do {
             break;
     }
 } while (yourChoice !== 11);
-let choice;
-do {
-} while (choice !== 11);
