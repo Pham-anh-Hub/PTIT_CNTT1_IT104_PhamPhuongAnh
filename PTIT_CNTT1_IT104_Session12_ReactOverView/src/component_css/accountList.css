@@ -1,0 +1,32 @@
+table {
+  width: 100%;
+  text-align: center;
+}
+
+table thead {
+  background-color: #f7f9fb;
+  color: #bdbbc5;
+  height: 10vh;
+}
+table tr {
+  background-color: #fff;
+  color: #898994;
+  height: 10vh;
+}
+tr td {
+  border-bottom: 1px solid #e0e0e3a4;
+}
+table button {
+  padding: 5px 10px;
+  border: 1px solid #d2d1d6;
+  border-radius: 8px;
+}
+.edit-btn {
+  color: #bdbbc5;
+  background-color: #fff;
+}
+
+.del-btn {
+  color: white;
+  background-color: #ef4444;
+}
