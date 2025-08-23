@@ -8,7 +8,15 @@ button {
   padding: 5px;
   margin-left: 5px;
 }
-
+.input-color {
+  padding: 0;
+  justify-self: center;
+  align-self: center;
+}
+.input-range {
+  color: blue;
+  padding: 0;
+}
 hr {
   border: 2px solid gray;
 }

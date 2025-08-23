@@ -36,7 +36,7 @@ export default class PTIT_CNTT1_IT104_Session15_Bai2 extends Component<
           Color: <span>{this.state.inputValue}</span>
         </h2>
         <div>Form:</div>
-        <input onChange={handleChange} type="color" />
+        <input className="input-color" onChange={handleChange} type="color" />
         <button onClick={() => handleSubmit} type="submit">
           Submit
         </button>

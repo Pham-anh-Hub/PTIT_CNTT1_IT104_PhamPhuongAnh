@@ -37,7 +37,7 @@ export default class PTIT_CNTT1_IT104_Session15_Bai3 extends Component<
         <div>
           Tiến độ hoàn thành: <span>{this.state.inputValue}%</span>
         </div>
-        <input onChange={handleChange} type="range" />
+        <input className="input-range" onChange={handleChange} type="range" />
         <div>
           <button onClick={() => handleSubmit} type="submit">
             Submit
