@@ -1,0 +1,133 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.form-task-list {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+}
+.form-task {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0px;
+}
+.form-task input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #e7e8ec;
+  border-radius: 6px;
+  outline: none;
+}
+.form-task input:focus {
+  box-shadow: rgba(178, 174, 243, 0.397) 0px 2px 8px 0px;
+}
+
+.form-task button {
+  background-color: #3b82f6;
+  color: #fff;
+}
+.form-task button:hover {
+  background-color: #3876da;
+  transform: translateY(-2px);
+  transform: scale(2px);
+  outline: none;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid #e7e8ec;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 10px;
+}
+.task-detail {
+  display: flex;
+  justify-content: space-between;
+}
+.task-detail .task-infor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* justify-content: center; */
+}
+
+.task-detail input {
+  width: 20px;
+  height: 20px;
+  border: 1px solid gray;
+  outline: none;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.quantity-task span {
+  display: flex;
+  align-items: flex-start;
+  background-color: #e7e8ec;
+  padding: 10px;
+  /* border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+/* form model delete */
+
+.form-confirm-delete {
+}
+
+.overlay-form {
+  position: fixed;
+  inset: 0;
+  background-color: black;
+  opacity: 0.5;
+}
+.form-main {
+  position: fixed;
+  top: 20vh;
+  left: 35vw;
+  background-color: #fff;
+  width: 35vw;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.form-main header {
+  display: flex;
+  justify-content: space-between;
+}
+.form-main .exit-icon {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.form-main .detail-task {
+  display: flex;
+  gap: 10px;
+}
+
+.form-main .action {
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+}
+
+.form-main .action :nth-child(1) {
+  background-color: rgba(252, 75, 75, 0.781);
+  color: #fff;
+}
