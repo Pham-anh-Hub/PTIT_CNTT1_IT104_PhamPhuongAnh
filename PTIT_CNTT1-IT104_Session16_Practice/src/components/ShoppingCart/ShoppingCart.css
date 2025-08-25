@@ -1,0 +1,136 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.header {
+  position: sticky;
+  top: 0;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ecfeff;
+}
+
+.left-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.left-header p:nth-child(1) {
+  font-size: 25px;
+  font-weight: 600;
+  color: #164e63;
+}
+.left-header p:nth-child(3) {
+  align-self: center;
+  font-size: 18px;
+  color: #06b6d4;
+}
+
+.shop-cart {
+  position: relative;
+  cursor: pointer;
+}
+
+.order-quantity {
+  position: absolute;
+  top: 80%;
+  right: 0;
+  border: 1px solid #8bbcec;
+  background-color: #8bbcec;
+  color: #164e63;
+  padding: 2px 8px;
+  border-radius: 50%;
+}
+
+.purchase-cart {
+  position: absolute;
+  top: 70%;
+  right: 20px;
+  border: 1px solid #8bbcec;
+  background-color: #8bbcec;
+  color: #164e63;
+  padding: 12px 20px;
+  width: 30vw;
+  border-radius: 8px;
+}
+.purchase-cart .empty-inform {
+  text-align: center;
+  font-size: 20px;
+  color: #143f4fa9;
+}
+.purchase-cart .error {
+  text-align: center;
+  font-size: 20px;
+  color: red;
+}
+.purchase-cart .cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.purchase-cart .cart-detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.purchase-cart hr {
+  border: 1px solid gray;
+  margin: 20px 0px;
+}
+
+.purchase-cart .cart-detail img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.purchase-cart .cart-detail .action-btn {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+/* CSS phần display */
+.list-display {
+  width: 100%;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-rows: repeat(2); */
+  gap: 20px;
+}
+.list-display li {
+  list-style: none;
+}
+.list-display li div:nth-child(1) {
+  border: 1px solid #dadada;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  width: calc((100%) - 10px);
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 5px;
+  gap: 15px;
+}
+
+.list-display li img {
+  width: calc(100% - 25px);
+}
+
+.list-display li div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.list-display li button {
+  background-color: #0d6efd;
+  color: #fff;
+}
