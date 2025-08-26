@@ -1,0 +1,41 @@
+.confirm-model {
+  /* position: relative; */
+}
+
+.confirm-model .overlay {
+  position: fixed;
+  inset: 0;
+  background-color: black;
+  opacity: 0.6;
+}
+.confirm-model .main-model {
+  padding: 20px;
+  border-radius: 8px;
+  position: fixed;
+  top: 20%;
+  left: 35%;
+  background-color: #fff;
+}
+
+.confirm-model .main-model p {
+  font-size: 25px;
+}
+
+.confirm-model .main-model .btn-action {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.confirm-model .main-model .btn-action :nth-child(1) {
+  border: 1px solid #dadada;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+.confirm-model .main-model .btn-action :nth-child(2) {
+  border: 1px solid #dadada;
+  padding: 5px 12px;
+  color: #fff;
+  border-radius: 8px;
+  background-color: rgb(249, 95, 44);
+}
