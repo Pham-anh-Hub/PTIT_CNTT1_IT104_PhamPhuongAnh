@@ -1,0 +1,103 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* model update */
+.model-update {
+}
+
+.model-update .model-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #000000;
+  opacity: 0.5;
+}
+
+.model-update .main-model {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 35%;
+  position: fixed;
+  padding: 15px;
+  top: 200px;
+  background-color: #fff;
+  border-radius: 8px;
+  left: 32%;
+}
+.model-update .main-model input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dadada;
+  outline: none;
+  border-radius: 8px;
+}
+
+.model-update .main-model input:focus {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.model-update .main-model .action-btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.model-update .action-btn button:nth-child(1) {
+  border: 1px solid #dadada;
+  background-color: gray;
+  color: #fff;
+  border-radius: 8px;
+  padding: 5px 8px;
+}
+.model-update .action-btn button:nth-child(2) {
+  border: 1px solid #dadada;
+  background-color: #fff;
+  color: #000000;
+  border-radius: 8px;
+  padding: 5px 8px;
+}
+
+.model-update .action-btn button:hover {
+  transform: scale(1.02);
+}
