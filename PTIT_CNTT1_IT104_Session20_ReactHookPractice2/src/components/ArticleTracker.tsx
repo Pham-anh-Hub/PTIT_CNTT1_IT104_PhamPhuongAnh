@@ -24,7 +24,11 @@ export default function ArticleTracker() {
       case "COMPLETE":
         setCompleteArticle([...completedArticle, action.payload]);
         return state.filter((item) => item.id !== action.payload.id);
-
+      case "UNCOMPLETE":
+        setCompleteArticle(
+          completedArticle.filter((item) => item.id !== action.payload.id)
+        );
+        return [...state, action.payload];
       default:
         return initialData;
     }
@@ -35,6 +39,13 @@ export default function ArticleTracker() {
     if (target) {
       console.log(target);
       dispatch({ type: "COMPLETE", payload: target });
+    }
+  };
+  const onUnComplete = (id: number) => {
+    const target = initialData.find((item: Article) => item.id === id);
+    if (target) {
+      console.log(target);
+      dispatch({ type: "UNCOMPLETE", payload: target });
     }
   };
   useEffect(() => {
@@ -110,8 +121,19 @@ export default function ArticleTracker() {
             <>
               {completedArticle.map((item) => (
                 <div className="read-detail">
-                  <h4>{item.title}...</h4>
-                  <p>{item.topic}</p>
+                  <span>
+                    <h4>{item.title}...</h4>
+                    <p>{item.topic}</p>
+                  </span>
+                  <span>
+                    <button
+                      onClick={() => {
+                        onUnComplete(item.id);
+                      }}
+                    >
+                      Đánh dấu chưa đọc
+                    </button>
+                  </span>
                 </div>
               ))}
             </>
