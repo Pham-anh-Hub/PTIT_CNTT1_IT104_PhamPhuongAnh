@@ -1,0 +1,321 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.container {
+  margin: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Bài 1 */
+.exercise01 {
+  border: 1px solid #dadada;
+  width: fit-content;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 10px;
+}
+
+.exercise01 input,
+.exercise02 input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #dadada;
+}
+.exercise01 .notice {
+  color: red;
+  border: 1px solid red;
+  background-color: rgb(255, 221, 221);
+  padding: 8px;
+  font-size: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* bài 2 */
+.exercise02 {
+  border: 1px solid #dadada;
+  width: fit-content;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display: flex;
+  flex-direction: column;
+}
+.exercise02 button {
+  padding: 8px;
+  width: fit-content;
+  border: 1px solid greenyellow;
+  border-radius: 8px;
+  background-color: rgb(195, 253, 195);
+}
+.exercise02 div {
+  margin-top: 20px;
+  border-left: 3px solid green;
+  padding: 10px;
+  background-color: rgb(219, 255, 219);
+}
+
+/* Bài 3 */
+.exercise03,
+.exercise04,
+.exercise05,
+.exercise06,
+.exercise07,
+.exercise08 {
+  border: 1px solid #dadada;
+  width: fit-content;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  text-align: center;
+}
+/* Bài 4 */
+.exercise04 input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #dadada;
+  border-radius: 8px;
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+/* Bài 6 */
+.exercise06 button {
+  padding: 8px;
+  width: fit-content;
+  border: 1px solid rgb(47, 141, 255);
+  border-radius: 8px;
+  background-color: rgb(195, 209, 253);
+}
+.exercise06 .overlayModel {
+  position: fixed;
+  inset: 0;
+  background-color: #000000;
+  opacity: 0.5;
+}
+.exercise06 .main-model {
+  position: fixed;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+}
+.exercise06 .main-model input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #dadada;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+.exercise06 .main-model button {
+  border: 1px solid rgb(255, 47, 47);
+  border-radius: 8px;
+  background-color: rgb(253, 195, 195);
+}
+
+/* Bài 7 */
+.exercise07 button {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #dadada;
+  margin: 2px;
+}
+
+/* Bài 8 */
+.exercise08 .input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-form input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #dadada;
+  border-radius: 6px;
+}
+.input-form button {
+  padding: 3px;
+  background-color: aliceblue;
+  border: 1px solid rgb(181, 217, 249);
+  border-radius: 6px;
+}
+.exercise08 .user-info {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-left: 2px solid blue;
+  background-color: aliceblue;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.exercise08 .user-info h2 {
+  font-size: 25px;
+}
+
+/* Bài 9 */
+.exercise09,
+.exercise10 {
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border: 1px solid #dadada;
+  padding: 10px;
+  width: 45vw;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+.exercise09 .header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.exercise09 .header h2 {
+  color: #316f9b;
+}
+.exercise09 form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* align-items: center; */
+}
+
+.exercise09 input {
+  width: 90%;
+  align-self: center;
+  padding: 10px 12px;
+  border: 1px solid #dadada;
+  border-radius: 8px;
+}
+
+.exercise09 .display-result {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 12px;
+  justify-content: center;
+}
+.exercise09 .display-result .detail {
+  border: 1px solid #dadada;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  width: 95%;
+}
+
+.exercise09 .empty {
+  font-weight: 550;
+  font-size: 20px;
+  color: gray;
+}
+
+/* Bài 10 */
+.exercise10 .header {
+  text-align: center;
+  margin: 15px 0px;
+}
+.exercise10 .header h1 {
+  color: #316f9b;
+  font-weight: 550;
+}
+.exercise10 .header .progress {
+  margin-top: 20px;
+  border: 1px solid #eeeeee;
+  background-color: #eeeeee;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: hidden; /* Dùng để ẩn nội dung bên ngoài khung chứa, đảm bảo mọi thứ được cắt và ẩn gọn gàng trong khung cha */
+}
+.exercise10 .header .progress div {
+  border: 1px solid transparent;
+  /* width: 50%; */
+  transition: width 1s ease; /* thời gian 0.5s, hiệu ứng easing --> tăng từ từ chiều rộng, không bị nhảy giật */
+  padding: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #316f9b;
+}
+
+.exercise10 .header .count-detail {
+  font-size: 12px;
+  color: gray;
+  margin-top: 10px;
+}
+
+.unread-quantity,
+.read-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.unread-quantity h3,
+.read-quantity h3 {
+  color: #2a5676;
+}
+.unread-quantity div,
+.read-quantity span {
+  background-color: #316f9b;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.unRead-article div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #dadada;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 5px 0px;
+}
+
+.unRead-article div span:nth-child(1) h4,
+.read-detail h4 {
+  font-size: 18px;
+  font-weight: 550;
+}
+.unRead-article span:nth-child(2) button {
+  padding: 3px 8px;
+  border: 1px solid #27ae60;
+  background-color: #27ae60;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+.unRead-article div span:nth-child(2) button:hover {
+  background-color: #228e4f;
+}
+
+.read-article div:nth-child(2) .read-detail {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dadada;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 5px 0px;
+}
+
+.read-article div:nth-child(2) .read-detail p {
+  font-size: 18px;
+  font-weight: 500;
+}
