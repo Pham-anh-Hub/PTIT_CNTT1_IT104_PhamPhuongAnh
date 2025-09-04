@@ -1,0 +1,6 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+hr {
+  border: 1px solid #253a38;
+  margin: 25px 0px;
+}
