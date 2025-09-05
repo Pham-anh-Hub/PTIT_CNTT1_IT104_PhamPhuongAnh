@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Comic+Relief:wght@400;700&family=Grechen+Fuemen&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sigmar&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+.main-manager {
+  height: calc(83vh - 18px);
+  margin: 18px;
+  background-color: #fff;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+table {
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border: 1px solid #eeeeee;
+  border-radius: 12px;
+}
+table thead th {
+  padding: 18px;
+  background-color: #fafafa;
+  border: 0px;
+  text-align: start;
+}
+table thead {
+  /* border-collapse: collapse; */
+}
+table tr {
+  background-color: #fff;
+  text-align: start;
+}
+table tr td {
+  padding: 15px 18px;
+}
+
+.action-btn {
+  display: flex;
+  gap: 12px;
+}
+
+.edit-btn {
+  width: 42px;
+  display: flex;
+  justify-content: center;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #eeeeee;
+}
+.delete-btn {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 1px solid red;
+  color: red;
+}
+.delete-btn:hover,
+.edit-btn :hover {
+  opacity: 0.6;
+}
