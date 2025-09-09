@@ -7,6 +7,7 @@ import Register from "./components/Register";
 import NotFound from "./components/NotFound";
 import Header from "./components/Header";
 import About from "./components/About";
+import User from "./components/User";
 
 function App() {
   return (
@@ -14,12 +15,14 @@ function App() {
       <Header /> {/* Bài 6 */}
       <Routes>
         {/* bài 1-2*/}
-        <Route path=":id" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         {/* Bài 3-4 và tận dụng cho bài 9-10 */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {/* Bài 10 */}
+        <Route path="/user/:id" element={<User />} />
         {/* Bài 5 */}
         <Route path="*" element={<NotFound />} />
       </Routes>

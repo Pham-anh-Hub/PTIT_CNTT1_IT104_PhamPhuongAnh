@@ -6,7 +6,7 @@ export default function Header() {
     // isActive là 1 object không phải boolean
     <div className="flex items-center justify-center gap-3.5">
       <NavLink
-        to={"/:id"}
+        to={"/"}
         className={({ isActive }) => (isActive ? "active" : "")}
       >
         Home

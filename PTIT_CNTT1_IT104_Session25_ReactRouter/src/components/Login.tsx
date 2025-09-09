@@ -36,7 +36,7 @@ export default function Login() {
       setError("Tài khoản không tồn tại");
     } else {
       if (inputPassword === targetAccount.password) {
-        navigate(`/${targetAccount.id}`);
+        navigate(`/user/${targetAccount.id}`);
       } else {
         setError("Mật khẩu không đúng");
       }
