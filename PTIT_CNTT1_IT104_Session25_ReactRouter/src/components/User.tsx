@@ -17,7 +17,7 @@ export default function User() {
   console.log(targetAccount);
 
   return (
-    <div className="flex flex-col items-center my-[6rem] gap-8">
+    <div className="flex flex-col items-center my-[6rem] gap-8  ">
       <h1 className="text-gray-700 text-4xl">Đây là trang chủ</h1>
       {targetAccount ? (
         <>
