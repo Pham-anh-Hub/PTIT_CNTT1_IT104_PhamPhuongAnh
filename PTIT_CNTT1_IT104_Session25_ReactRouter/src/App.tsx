@@ -14,7 +14,7 @@ function App() {
       <Header /> {/* Bài 6 */}
       <Routes>
         {/* bài 1-2*/}
-        <Route path="/:id" element={<Home />} />
+        <Route path=":id" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         {/* Bài 3-4 và tận dụng cho bài 9-10 */}

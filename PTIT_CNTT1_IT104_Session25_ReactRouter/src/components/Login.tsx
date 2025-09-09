@@ -83,7 +83,7 @@ export default function Login() {
       </button>
       <p className="text-gray-600 text-[10px] w-[90%] text-center">
         Already have an account?{" "}
-        <Link to={"/register/:productId"}>
+        <Link to={"/register"}>
           <b>Register here</b>
         </Link>
       </p>
