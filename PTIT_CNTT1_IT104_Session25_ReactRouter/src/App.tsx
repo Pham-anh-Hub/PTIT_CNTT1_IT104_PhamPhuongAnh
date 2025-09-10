@@ -8,6 +8,8 @@ import NotFound from "./components/NotFound";
 import Header from "./components/Header";
 import About from "./components/About";
 import User from "./components/User";
+import ListUser from "./components/ListUser";
+import UserDetail from "./components/UserDetail";
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        {/* Bài 8 */}
+        <Route path="/list-user" element={<ListUser />} />
+        <Route path="/user-detail/:id" element={<UserDetail />} />
         {/* Bài 3-4 và tận dụng cho bài 9-10 */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
