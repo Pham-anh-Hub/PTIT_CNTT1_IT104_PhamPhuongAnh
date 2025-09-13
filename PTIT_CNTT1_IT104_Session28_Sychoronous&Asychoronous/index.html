@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài tập tổng hợp -->
+    <!-- <script>
+      // Viết hàm delay(ms) trả về một Promise resolve sau ms mili giây (giả lập việc chờ API, đọc file,...)
+      const delay = (ms) => {
+        return new Promise((resolve) => {
+          setTimeout(resolve, ms);
+        });
+      };
+
+      // Viết hàm runTasks() thực hiện 3 tác vụ tuần tự, mỗi tác vụ in ra thông báo sau khi hoàn thành
+      const runTasks = async () => {
+        // console.log("Run Task 1");
+        // delay(1000) // triển khai thuần, không chạy ==> sử dụng async - await
+        await delay(1000);
+        console.log("Done Task 1");
+
+        // console.log("Run Task 2");
+        // delay(1000) // triển khai thuần, không chạy ==> sử dụng async - await
+        await delay(2000);
+        console.log("Done Task 2");
+
+        // console.log("Run Task 3");
+        // delay(1000) // triển khai thuần, không chạy ==> sử dụng async - await
+        await delay(1500);
+        console.log("Done Task 3");
+      };
+      // runTasks()
+
+      // Viết hàm parallelTasks() chạy 2 tác vụ song song
+      const logTask = (string, time) => {
+        setTimeout(() => {
+          console.log(string);
+        }, time);
+      };
+
+      const parallelTasks = () => {
+        const taskA = logTask("Task A done", 1000);
+        const taskB = logTask("Task B done", 1500);
+
+        Promise.all([taskA, taskB])
+          .then((res) => res)
+          .catch((error) => error)
+          .finally(() => console.log("All parallel tasks done!"));
+      };
+
+      // Tạo hàm fetchData() giả lập việc "fetch dữ liệu" (50% thành công, 50% thất bại)
+      const fetchData = () => {
+        return new Promise((resolve, reject) => {
+          const result = Math.random() > 0.5;
+
+          setTimeout(() => {
+            if (result) {
+              resolve({ data: "Success" });
+            } else {
+              reject("Failure");
+            }
+          }, 1000);
+        });
+      };
+
+      const handleData = async () => {
+        try {
+          const result = await fetchData();
+          console.log("Result: ", result);
+        } catch (error) {
+          console.error("Error", error);
+        }
+      };
+
+      handleData();
+    </script> -->
+
+    <!-- <script src="./dist/Exercise01.js"></script>
+    <script src="./dist/Exercise02.js"></script>
+    <script src="./dist/Exercise03.js"></script> -->
+    <!-- <script src="./dist/Exercise04.js"></script> -->
+    <!-- <script src="./dist/Exercise05.js"></script> -->
+    <!-- <script src="./dist/Exercise06.js"></script> -->
+    <!-- <script src="./dist/Exercise06.js"></script> -->
+    <!-- <script src="./dist/Exercise07.js"></script> -->
+    <script src="./dist/Exercise08.js"></script>
+    <script src="./dist/Exercise10.js"></script>
+  </body>
+</html>
