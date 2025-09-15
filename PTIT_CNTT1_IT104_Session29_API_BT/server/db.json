@@ -1,0 +1,134 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "product_name": "Sản phẩm 1",
+      "image": "sp1.jpn",
+      "price": 100000,
+      "quantity": 20,
+      "createAt": "20/12/2020"
+    },
+    {
+      "id": 2,
+      "product_name": "Sản phẩm so 2",
+      "price": 200000,
+      "quantity": 20,
+      "createAt": "22/09/2020"
+    },
+    {
+      "id": 3,
+      "product_name": "Sản phẩm 3",
+      "image": "sp3.jpn",
+      "price": 300000,
+      "quantity": 20,
+      "createAt": "10/12/2020"
+    },
+    {
+      "id": 4,
+      "product_name": "Sản phẩm 4",
+      "image": "sp4.jpn",
+      "price": 400000,
+      "quantity": 20,
+      "createAt": "12/12/2020"
+    },
+    {
+      "id": 5,
+      "product_name": "Sản phẩm 5",
+      "image": "sp5.jpn",
+      "price": 500000,
+      "quantity": 20,
+      "createAt": "25/12/2020"
+    },
+    {
+      "product_name": "Sản phẩm so 6",
+      "image": "sp1.jpn",
+      "price": 100000,
+      "quantity": 20,
+      "createAt": "20/12/2020",
+      "id": 6
+    }
+  ],
+  "students": [
+    {
+      "id": 2,
+      "studentName": "Trần Thị B",
+      "email": "ttb@gmail.com",
+      "address": "Ba Đình, Hà Nội",
+      "phone": "0912345678",
+      "status": false,
+      "createAt": "2021-11-15"
+    },
+    {
+      "id": 5,
+      "studentName": "Hoàng Văn E",
+      "email": "hve@gmail.com",
+      "address": "Đống Đa, Hà Nội",
+      "phone": "0901234567",
+      "status": false,
+      "createAt": "2021-08-28"
+    },
+    {
+      "id": 7,
+      "studentName": "Ngô Văn G",
+      "email": "nvg@gmail.com",
+      "address": "Long Biên, Hà Nội",
+      "phone": "0981122334",
+      "status": true,
+      "createAt": "2021-06-30"
+    },
+    {
+      "id": 8,
+      "studentName": "Vũ Thị H",
+      "email": "vth@gmail.com",
+      "address": "Nam Từ Liêm, Hà Nội",
+      "phone": "0922334455",
+      "status": false,
+      "createAt": "2021-05-22"
+    },
+    {
+      "id": 9,
+      "studentName": "Bùi Văn I",
+      "email": "bvi@gmail.com",
+      "address": "Bắc Từ Liêm, Hà Nội",
+      "phone": "0933445566",
+      "status": true,
+      "createAt": "2021-04-11"
+    },
+    {
+      "id": 10,
+      "studentName": "Đỗ Thị K",
+      "email": "dtk@gmail.com",
+      "address": "Hoàn Kiếm, Hà Nội",
+      "phone": "0955566778",
+      "status": true,
+      "createAt": "2021-03-03"
+    },
+    {
+      "studentName": "Nguyễn Văn T",
+      "email": "nva@gmail.com",
+      "address": "Đà Nẵng",
+      "phone": "0981310825",
+      "status": true,
+      "createAt": "2025-09-15",
+      "id": 12
+    },
+    {
+      "studentName": "Lê Văn Q",
+      "email": "lvq@gmail.com",
+      "address": "Thanh Xuân, Hà Nội",
+      "phone": "0987656781",
+      "status": false,
+      "createAt": "2025-09-15",
+      "id": 13
+    },
+    {
+      "studentName": "Phạm Minh Quân",
+      "email": "pmquan@gmail.com",
+      "address": "Hà Nội",
+      "phone": "0987678987",
+      "status": true,
+      "createAt": "2025-09-15",
+      "id": 14
+    }
+  ]
+}
