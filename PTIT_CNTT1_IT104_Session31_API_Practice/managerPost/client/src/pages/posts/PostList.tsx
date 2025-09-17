@@ -26,6 +26,9 @@ export default function PostList() {
   const [targetUpdate, setTargetUpdate] = useState<Post | undefined>();
   const [openConfirmBlock, setOpenConfirmBlock] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [statusFilter, setStatusFilter] = useState<"active" | "inactive" | "">(
+    ""
+  );
 
   // Gọi custom hook useDebounce : delay và tối ưu hiệu năng khi người dùng tìm kiếm bài viết
   const debouceSearch = useDebounce(searchValue, 500);
@@ -33,7 +36,11 @@ export default function PostList() {
   const loadPosts = () => {
     try {
       axios
-        .get(`http://localhost:8080/posts/?title_like=${debouceSearch}`)
+        .get(
+          `http://localhost:8080/posts/?title_like=${debouceSearch}${
+            statusFilter ? `&status=${statusFilter}` : ""
+          }`
+        )
         .then((response) => {
           console.log("response data: ", response.data);
           setPosts(response.data);
@@ -48,7 +55,7 @@ export default function PostList() {
   useEffect(() => {
     loadPosts();
     console.log(actionStatus);
-  }, [debouceSearch]);
+  }, [debouceSearch, statusFilter]);
 
   const columns: TableProps<Post>["columns"] = [
     {
@@ -319,6 +326,18 @@ export default function PostList() {
     setSearchValue(e.target.value);
   };
 
+  /** Lọc bài viết*/
+  const handleChange = (value: string) => {
+    console.log("value: ", value);
+    if (value === "active") {
+      setStatusFilter("active");
+    } else if (value === "inactive") {
+      setStatusFilter("inactive");
+    } else {
+      setStatusFilter("");
+    }
+  };
+
   return (
     <>
       <h1 className="mt-5 w-[85%] text-2xl mx-[auto]">Quản lý bài viết</h1>
@@ -331,12 +350,13 @@ export default function PostList() {
               placeholder="Nhập từ khóa tìm kiếm"
             />
             <Select
-              defaultValue="filter"
+              defaultValue=""
               style={{ width: 120 }}
-              // onChange={handleChange}
+              onChange={handleChange}
               options={[
-                { value: "filter", label: "Lọc bài viết" },
-                { value: "disabled", label: "Disabled", disabled: true },
+                { value: "", label: "Lọc bài viết" },
+                { value: "active", label: "Đã xuất bản" },
+                { value: "inactive", label: "Ngưng xuất bản" },
               ]}
             />
           </div>

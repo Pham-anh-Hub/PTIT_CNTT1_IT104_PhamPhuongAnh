@@ -13,7 +13,7 @@
       "title": "Props trong ReactJS",
       "image": "https://i.ytimg.com/vi/CgkZ7MvWUAA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB1w_fcYm2Mc7UEvyZkXotLcl0ghw",
       "createAt": "Thu Sep 18 2025 09:15:32 GMT+0700 (Indochina Time)",
-      "status": "draft",
+      "status": "inactive",
       "content": "# Props trong ReactJS\nProps dùng để **truyền dữ liệu** từ component cha xuống component con.\n\n## Ví dụ\n```jsx\nfunction Welcome(props) {\n  return <h1>Hello, {props.name}</h1>;\n}\n\n<Welcome name=\"Anh\" />\n```"
     },
     {
