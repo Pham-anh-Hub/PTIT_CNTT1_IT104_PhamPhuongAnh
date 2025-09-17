@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Học State trong ReactJS cùng mình nhé !",
+      "image": "https://techvccloud.mediacdn.vn/280518386289090560/2024/9/17/reactjs-1726545361892465400796-6-0-465-817-crop-17265453645351178455990.jpg",
+      "createAt": "Wed Sep 17 2025 14:35:52 GMT+0700 (Indochina Time)",
+      "status": "active",
+      "content": "# State trong ReactJS\nState trong **ReactJS** là một trong những khái niệm quan trọng nhất.\n\n## Ví dụ\n```jsx\nconst [count, setCount] = useState(0);\n```\n👉 Bạn có thể cập nhật state bằng `setCount`."
+    },
+    {
+      "id": 2,
+      "title": "Props trong ReactJS",
+      "image": "https://i.ytimg.com/vi/CgkZ7MvWUAA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB1w_fcYm2Mc7UEvyZkXotLcl0ghw",
+      "createAt": "Thu Sep 18 2025 09:15:32 GMT+0700 (Indochina Time)",
+      "status": "draft",
+      "content": "# Props trong ReactJS\nProps dùng để **truyền dữ liệu** từ component cha xuống component con.\n\n## Ví dụ\n```jsx\nfunction Welcome(props) {\n  return <h1>Hello, {props.name}</h1>;\n}\n\n<Welcome name=\"Anh\" />\n```"
+    },
+    {
+      "id": 3,
+      "title": "Lifecycle trong ReactJS",
+      "image": "https://caodang.fpt.edu.vn/wp-content/uploads/2025/05/FPT-Polytechnic-HCM-2.png",
+      "createAt": "Fri Sep 19 2025 11:42:20 GMT+0700 (Indochina Time)",
+      "status": "inactive",
+      "content": "# Vòng đời (Lifecycle) trong ReactJS\nCác hook quan trọng:\n\n- **useEffect**: chạy khi component mount/update/unmount.\n- **useLayoutEffect**: chạy đồng bộ sau khi DOM thay đổi.\n\n## Ví dụ\n```jsx\nuseEffect(() => {\n  console.log(\"Component mounted\");\n}, []);\n```"
+    },
+    {
+      "title": "Học React dễ lắm",
+      "image": "https://i.ytimg.com/vi/CgkZ7MvWUAA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB1w_fcYm2Mc7UEvyZkXotLcl0ghw",
+      "createAt": "Wed Sep 17 2025 21:21:31 GMT+0700 (Indochina Time)",
+      "status": "active",
+      "content": "> Tổng quan về React\n\n- Học `React `cùng mình nhé!!",
+      "id": 4
+    },
+    {
+      "title": "Học React Router nhé",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT11KTsJ6crAt-FJUX0gCRkPQuMmu6EH9gR1A&s",
+      "createAt": "Wed Sep 17 2025 21:47:14 GMT+0700 (Indochina Time)",
+      "status": "active",
+      "content": "*Học React Router dễ lắm*",
+      "id": 5
+    }
+  ]
+}
