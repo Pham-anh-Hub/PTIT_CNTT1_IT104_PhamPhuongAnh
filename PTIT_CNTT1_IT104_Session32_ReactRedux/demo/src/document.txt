@@ -1,0 +1,39 @@
+
+* REDUX CORE - Tổng quan*
+
+// Khi thực hiện việc truyền dữ liệu giữa các component với nhau, với các TH lớp cha nhiều và chồng nhiều lớp ==> hiện tượng prop-drilling
+==>  Giải pháp: Redux - quản lý dữ liệu, trạng thái trong toàn bộ dự án một cách dự đoán được
+
+ ## Redux là 1 thư viện quản lý trạng thái 
+    - Giúp quản lý và duy trì trạng thái của ứng dụng 1 cách nhất quán và dễ kiểm soát
+    - Redux không chỉ giới hạn cho React - nó còn có thể sử dụng với bất kỳ thư viện UI nào (vd: Angular, Vue, Vanilla,..) trong hệ sinh thái JavaScript
+    - Redux được xây dựng dựa trên kiến trúc (same same dạng cây) 
+
+      Redux = useReducer + useContext + ...
+      --> tương tự như localStorage, nhưng redux làm việc theo phiên
+
+      ==> tạo riêng 1 store (1 vùng chứa riêng) lưu trữ cho toàn bộ ứng dụng
+
+
+
+ ** Store : giống như 1 cái kho trung tâm để lưu trữ state của toàn bộ ứng dụng
+          - Theo bth mỗi component sẽ đc tự tạo có state riêng -> khó quản lý nếu ứng dụng gồm cả quá nhiều component
+           ===> Redux gom tất cả state tại 1 chỗ : Store
+
+   * RootState : toàn bộ hình dạng trong store, dưới dạng:
+        type RootState = {
+          counter: {
+            value : number
+          };
+          profile: {
+            id: number;
+            userName: string,
+            gender: string,
+            dateBirth: string,
+            address: string
+          }
+        }
+         👉 Có thể hiểu RootState là bản đồ của toàn bộ state trong ứng dụng
+          
+
+
