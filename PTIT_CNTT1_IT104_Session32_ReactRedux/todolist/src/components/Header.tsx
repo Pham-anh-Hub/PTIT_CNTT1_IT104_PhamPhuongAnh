@@ -1,21 +1,63 @@
-import { Button, Input, Modal, Select } from "antd";
+import { Button, Input, message, Modal, Radio, Select } from "antd";
 import React, { useState } from "react";
+import { Priority, type Task } from "../redux/reducers/todo.reducers";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
 
 export default function Header() {
+  const listTodo = useSelector((state: RootState) => state);
+  const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const handleChange = () => {};
+  const [inputTitleTask, setInputTitleTask] = useState<string>("");
+  const [inputPriority, setInputPriority] = useState<
+    keyof typeof Priority | undefined
+  >(undefined);
+  const dispatch = useDispatch();
 
   /**
    * Thao tác cùng modal thêm mới
    * Các hàm set đóng mở
    */
-  const handleOk = () => {
+  const handleConfirmAdd = () => {
+    if (!inputPriority || !inputTitleTask) {
+      messageApi.open({
+        type: "error",
+        content: "Thông tin không được để trống",
+      });
+      return;
+    }
+    if (listTodo?.find((item) => item.title === inputTitleTask)) {
+      messageApi.open({
+        type: "error",
+        content: "Tên nhiệm vụ không được trùng nhau",
+      });
+    } else {
+      const newTask: Task = {
+        id: Math.round(Math.random() * 100000),
+        title: inputTitleTask,
+        isDone: false,
+        levelPriority: inputPriority,
+      };
+      console.log("NewTask: ", newTask);
+      dispatch({ type: "ADD", payload: newTask });
+      setIsModalOpen(false);
+      messageApi.open({
+        type: "success",
+        content: "Thêm mới nhiệm vụ thành công",
+      });
+      setInputPriority(undefined)
+      setInputTitleTask("")
+    }
+  };
+
+  const handleCancelAdd = () => {
     setIsModalOpen(false);
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  const handleFilterChange = (value : string) => {
+    console.log(value);
+    dispatch({type:"FILTER", payload: value})
+  }
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -24,7 +66,7 @@ export default function Header() {
         <Select
           defaultValue=""
           style={{ width: "fit-content" }}
-          onChange={handleChange}
+          onChange={handleFilterChange}
           options={[
             { value: "", label: "Lọc theo cấp độ" },
             { value: "pressing", label: "Khẩn cấp" },
@@ -41,37 +83,38 @@ export default function Header() {
         title="Thêm mới công việc"
         closable={true}
         open={isModalOpen}
-        onOk={handleOk}
+        onOk={handleConfirmAdd}
         okText="Thêm"
         cancelText="Hủy"
-        onCancel={handleCancel}
+        onCancel={handleCancelAdd}
       >
-        <div>
-          <label htmlFor="">Tên công việc</label>
-          <Input />
-        </div>
-        <div>
-          <label htmlFor="">Cấp độ</label>
-          <div style={{margin:0}} className="flex justify-center items-center w-[100%]">
-            <div className="flex items-center">
-              <Input type="radio" />
-              <label className="" htmlFor="">Khẩn cấp</label>
-            </div>
-            <div className="flex items-center">
-              <Input type="radio" />
-              <label className="" htmlFor="">Quan trọng</label>
-            </div>
-            <div className="flex items-center">
-              <Input type="radio" />
-              <label className="" htmlFor="">Bình thường</label>
-            </div>
-            <div className="flex items-center">
-              <Input type="radio" />
-              <label className="" htmlFor="">Không quan trọng</label>
-            </div>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="">Tên công việc</label>
+            <Input
+              value={inputTitleTask}
+              onChange={(e) => {
+                setInputTitleTask(e.target.value);
+              }}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="">Cấp độ</label>
+            <Radio.Group
+              className="flex justify-center gap-6 mt-2"
+              onChange={(e) => setInputPriority(e.target.value)}
+              value={inputPriority}
+            >
+              <Radio value="pressing">Khẩn cấp</Radio>
+              <Radio value="vital">Quan trọng</Radio>
+              <Radio value="normal">Bình thường</Radio>
+              <Radio value="imnormal">Không quan trọng</Radio>
+            </Radio.Group>
           </div>
         </div>
       </Modal>
+
+      {contextHolder}
     </div>
   );
 }
