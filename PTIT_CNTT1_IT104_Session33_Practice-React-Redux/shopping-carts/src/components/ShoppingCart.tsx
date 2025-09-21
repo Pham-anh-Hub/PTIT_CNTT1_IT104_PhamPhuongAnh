@@ -2,12 +2,18 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../redux/reducers/index.reducer";
 import type { Cart } from "../redux/reducers/carts.reducers";
-import { Modal } from "antd";
+import { message, Modal } from "antd";
+import type { Item } from "../redux/reducers/items.reducer";
 
 export default function ShoppingCart() {
   const listCart: Cart[] = useSelector((state: RootState) => state.carts);
+  const listItem: Item[] = useSelector((state: RootState) => state.items);
+
+  const [messageApi, contextHolder] = message.useMessage();
   const [addSuccess, setAddSuccess] = useState<boolean>(false);
   const [deleteSuccess, setDeleteSuccess] = useState<boolean>(false);
+  const [updateSuccess, setUpdateSuccess] = useState<boolean>(false);
+  const [updateQuantity, setUpdateQuantity] = useState<number>(1);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [targetDelete, setTargetDelete] = useState<Cart | undefined>(undefined);
@@ -37,6 +43,32 @@ export default function ShoppingCart() {
   const handleCancelDelete = () => {
     setIsModalOpen(false);
   };
+
+  const handleUpdateItem = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+
+    setUpdateQuantity(Number(e.target.value));
+  };
+
+  const updateItem = (id: number) => {
+    const targetUpdate = listItem.find((item) => item.id === id);
+    if (updateQuantity > Number(targetUpdate?.quantity)) {
+      messageApi.open({
+        type: "warning",
+        content: "Số lượng sản phẩm vượt quá số lượng trong kho ",
+      });
+    } else {
+      dispatch({ type: "UPDATE", payload: { id, quantity: updateQuantity } });
+    }
+    countTotal();
+    setUpdateSuccess(true)
+  };
+
+  useEffect(() => {
+    if (updateSuccess) {
+      setTimeout(() => setUpdateSuccess(false), 1500);
+    }
+  }, [updateSuccess]);
 
   useEffect(() => {
     if (deleteSuccess) {
@@ -77,13 +109,16 @@ export default function ShoppingCart() {
                       <td>{item.purchase.price} USD</td>
                       <td>
                         <input
+                          onChange={handleUpdateItem}
                           name="cart-item-quantity-1"
                           type="number"
-                          value={item.quantity}
+                          value={updateQuantity}
+                          defaultValue={item.quantity}
                         />
                       </td>
                       <td>
                         <button
+                          onClick={() => updateItem(item.purchase.id)}
                           className="label label-info update-cart-item"
                           data-product=""
                         >
@@ -145,6 +180,16 @@ export default function ShoppingCart() {
                 Delete cart successfully
               </div>
             </>
+          ) : updateSuccess ? (
+            <>
+              <div
+                className="alert alert-warning"
+                role="alert"
+                id="mnotification"
+              >
+                Update cart successfully
+              </div>
+            </>
           ) : (
             <></>
           )}
@@ -164,6 +209,7 @@ export default function ShoppingCart() {
           Bạn xác nhận xóa sản phẩm <b>{`<${targetDelete?.purchase.name}>`}</b>
         </p>
       </Modal>
+      {contextHolder}
     </div>
   );
 }
