@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import type { Student } from "../utils/types";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../redux/store/index.store";
+import { message } from "antd";
 
 interface StudentFormProps {
   onSubmit: (student: Student) => void;
@@ -22,6 +23,7 @@ type FormChangeEvent = InputChangeEvent | SelectChangeEvent;
 
 const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
   const dispatch = useDispatch();
+   const [messageApi, contextHolder] = message.useMessage();
   const defaultValue: Student = {
     id: "",
     name: "",
@@ -31,7 +33,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
     hometown: "",
     address: "",
   };
-  const {student, mode} = useSelector((state: RootState) => state.formInfo);
+  const { student, mode } = useSelector((state: RootState) => state.formInfo);
   const [statusSubmit, setStatusSubmit] = useState<string>("add");
 
   // const [statusSubmit, setStatusSubmit] = useState<string>(`${targetUpdate ? "edit" : "add"}`)
@@ -45,15 +47,15 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
     address: "",
   });
   useEffect(() => {
-    if (student){
-      if(mode === "edit"){
-        setStatusSubmit("edit")
-        setForm(student)
-      }else if(mode === "detail"){
-        setStatusSubmit("detail")
-        setForm(student)
-      }else{
-        setForm(defaultValue)
+    if (student) {
+      if (mode === "edit") {
+        setStatusSubmit("edit");
+        setForm(student);
+      } else if (mode === "detail") {
+        setStatusSubmit("detail");
+        setForm(student);
+      } else {
+        setForm(defaultValue);
       }
     }
   }, [student, mode]);
@@ -64,7 +66,13 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
   };
 
   const handleSubmit = () => {
-    if (!form.id || !form.name) return;
+    if (!form.id || !form.name) {
+      messageApi.open({
+      type: 'error',
+      content: 'Thông tin không được để trống',
+    });
+      return;
+    }
     onSubmit(form);
     console.log(form);
     dispatch({ type: "ADD", payload: form });
@@ -96,6 +104,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
   };
 
   return (
+    <>
     <div className="w-1/3 p-4 border rounded-xl shadow">
       <h2 className="font-semibold mb-4">Thông Tin Sinh Viên</h2>
       <div className="flex flex-col gap-4">
@@ -173,6 +182,8 @@ const StudentForm: React.FC<StudentFormProps> = ({ onSubmit }) => {
         </Button>
       </div>
     </div>
+    {contextHolder}
+    </>
   );
 };
 
