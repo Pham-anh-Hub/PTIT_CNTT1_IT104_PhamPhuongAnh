@@ -7,6 +7,8 @@ import changeModeSlice from "../slices/mode.slices"
 import menuModeSlice from "../slices/menu.slices"
 import languageSlice from "../slices/language.slices"
 import favourUserSlice from "../slices/likedUse.slices"
+import loginSlice from "../slices/login.slices"
+import homeSlice from "../slices/home.slices"
 
 
 const store = configureStore({
@@ -20,7 +22,9 @@ const store = configureStore({
     changeMode : changeModeSlice,
     menuMode : menuModeSlice,
     languageMode: languageSlice,
-    favouritUser: favourUserSlice
+    favouritUser: favourUserSlice,
+    login: loginSlice,
+    userInfor: homeSlice
   },
 })
 export default store

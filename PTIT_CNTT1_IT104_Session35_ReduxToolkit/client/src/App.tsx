@@ -17,15 +17,15 @@ function App() {
         {/* <Datas /> */}
         <Random />
         <hr />
-        <ChangeTheme/>
+        <ChangeTheme />
         <hr />
-        <ChangeMode/>
+        <ChangeMode />
         <hr />
-        <MenuMode/>
+        <MenuMode />
         <hr />
-        <Language/>
+        <Language />
         <hr />
-        <FavouriteUsers/>
+        <FavouriteUsers />
       </div>
     </>
   );
