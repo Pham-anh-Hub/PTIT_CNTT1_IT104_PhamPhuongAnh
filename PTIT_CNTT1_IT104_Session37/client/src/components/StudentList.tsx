@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/reduxHook/useHook";
 import { deleteStudent, getAllList } from "../apis/getData";
 import CreateIcon from "@mui/icons-material/Create";

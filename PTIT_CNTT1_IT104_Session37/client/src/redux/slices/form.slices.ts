@@ -22,7 +22,7 @@ const formActionSlice = createSlice({
     name: "formAction",
     initialState,
     reducers: {
-        setEditInfor(state, action) {
+        setEditInfor(_state, action) {
             if (action.payload) {
                 console.log(action.payload); 
                 return action.payload

@@ -60,6 +60,11 @@ const studentListSlice = createSlice({
             ? { ...student, ...action.payload }
             : student
         );
+        state.students = state.students.map((student) =>
+          student.id === action.payload.id
+            ? { ...student, ...action.payload }
+            : student
+        );
       })
       .addCase(searchStudent.fulfilled, (state, action) => {
         if (action.payload === null) {
