@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { Modal } from "antd";
+import { message, Modal } from "antd";
 import BookSearchSortFilter from "./BookSearchSortFilter";
 import { useAppDispatch, useAppSelector } from "../redux/reduxHook.ts/useHook";
 import type { Book } from "../interfaces/types";
@@ -29,6 +29,7 @@ export default function MainManagerBooks() {
   const [categoryFilter, setCategoryFilter] = useState<string>("");
   const [sortBy, setSortBy] = useState<"title" | "year">("title");
   const [sortOpt, setSortOpt] = useState<"up" | "down">("up");
+  const [messageApi, contextHolder] = message.useMessage();
   useEffect(() => {
     dispatch(getAllData());
   }, [dispatch]);
@@ -57,7 +58,9 @@ export default function MainManagerBooks() {
     setSortOpt("up");
   };
 
-  const categories = Array.from(new Set(initialBooks.map((book) => book.category)));
+  const categories = Array.from(
+    new Set(initialBooks.map((book) => book.category))
+  );
 
   const handleSubmit = (data: {
     id?: string;
@@ -73,10 +76,17 @@ export default function MainManagerBooks() {
       // Thêm mới, id và data
       const id = Date.now().toString();
       console.log({ id: id, ...data });
-
-      dispatch(addNewData({ id: id, ...data }));
+      const exitedBook = books.find((book) => book.title === data.title);
+      if (exitedBook) {
+        messageApi.open({
+          type: "error",
+          content: "Tên sách không được phép trùng",
+        });
+      } else {
+        dispatch(addNewData({ id: id, ...data }));
+        setOpenForm(false);
+      }
     }
-    setOpenForm(false);
   };
 
   // const filteredSorted = useMemo(() => {
@@ -180,6 +190,7 @@ export default function MainManagerBooks() {
             Xác nhận xóa sách <b>{`<${deleting?.title}>`}</b> ?
           </p>
         </Modal>
+        {contextHolder}
       </div>
     </div>
   );
