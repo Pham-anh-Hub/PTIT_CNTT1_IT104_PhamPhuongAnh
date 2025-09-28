@@ -1,0 +1,46 @@
+{
+  "books": [
+    {
+      "title": "Mắt Biếc",
+      "author": "Nguyễn Nhật Ánh",
+      "year": 2025,
+      "category": "Novel",
+      "id": "BLH3_ph"
+    },
+    {
+      "id": "3",
+      "title": "Sapiens",
+      "author": "Yuval Noah Harari",
+      "year": 2011,
+      "category": "History"
+    },
+    {
+      "id": "4",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "year": 1960,
+      "category": "Novel"
+    },
+    {
+      "id": "6",
+      "title": "Guns, Germs, and Steel",
+      "author": "Jared Diamond",
+      "year": 1997,
+      "category": "History"
+    },
+    {
+      "id": "7",
+      "title": "1984",
+      "author": "George Orwell",
+      "year": 1949,
+      "category": "Novel"
+    },
+    {
+      "id": "8",
+      "title": "Thinking, Fast and Slow",
+      "author": "Daniel Kahneman",
+      "year": 2011,
+      "category": "Science"
+    }
+  ]
+}
