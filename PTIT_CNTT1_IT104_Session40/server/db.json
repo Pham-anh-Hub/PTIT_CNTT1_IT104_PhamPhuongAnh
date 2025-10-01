@@ -1,0 +1,87 @@
+{
+  "products": [
+    {
+      "id": "1b97b66e-7501-484d-b643-78c5ddbc4742",
+      "code": "SP002",
+      "name": "San pham so 02",
+      "category": "1",
+      "price": 120000,
+      "image": "http://res.cloudinary.com/phamphuonganh/image/upload/v1759306802/a6u1kezlxidltydjou6f.jpg",
+      "status": "active"
+    },
+    {
+      "id": "d604fdbe-2eb3-48ce-80d4-af0db88a6405",
+      "code": "SP003",
+      "name": "San pham 3",
+      "category": "2",
+      "price": 123000,
+      "image": "http://res.cloudinary.com/phamphuonganh/image/upload/v1759248933/agrjekozmrjicduenfhk.jpg",
+      "status": "active"
+    },
+    {
+      "id": "436ec77e-f0b0-4dbb-bd70-3e8811b4d481",
+      "code": "SP0021",
+      "name": "San pham so 21",
+      "category": "1",
+      "price": 120000,
+      "image": "http://res.cloudinary.com/phamphuonganh/image/upload/v1759309697/uvvbdboozxklachax9yv.jpg",
+      "status": "active"
+    },
+    {
+      "id": "43e4bdfe-2225-4171-83b0-34dc1bab2275",
+      "code": "SP0032",
+      "name": "San pham 32",
+      "category": "3",
+      "price": 125000,
+      "image": "http://res.cloudinary.com/phamphuonganh/image/upload/v1759307555/pl9xy3s1g38dejnocsvo.jpg",
+      "status": "active"
+    },
+    {
+      "id": "4ceee398-a912-4ad1-8028-66d17a3f568c",
+      "code": "SP00N",
+      "name": "San pham thu n",
+      "category": "1",
+      "price": 123000,
+      "image": "http://res.cloudinary.com/phamphuonganh/image/upload/v1759307614/dg1aihnmcoy0o1hhgr9t.jpg",
+      "status": "active"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-001",
+      "name": "Điện tử",
+      "description": "Các sản phẩm điện tử như điện thoại, laptop, máy ảnh",
+      "status": "active"
+    },
+    {
+      "id": "cat-002",
+      "name": "Thời trang",
+      "description": "Quần áo, giày dép ",
+      "status": "active"
+    },
+    {
+      "id": "cat-004",
+      "name": "Sách",
+      "description": "Sách học thuật, tiểu thuyết, truyện tranh và tạp chí",
+      "status": "active"
+    },
+    {
+      "id": "cat-005",
+      "name": "Thể thao",
+      "description": "Dụng cụ thể thao, quần áo thể thao và phụ kiện",
+      "status": "inactive"
+    },
+    {
+      "id": "06210feb-de4c-4d7d-8df0-69d3eb1c8594",
+      "name": "Thực phẩm",
+      "description": "Danh mục chứa các sản phẩm thực phẩm\n",
+      "status": "active"
+    },
+    {
+      "id": "aa45e732-a047-489c-ae8b-bd1797295a7b",
+      "name": "dffd",
+      "description": "ytytyt",
+      "status": "active"
+    }
+  ]
+}
