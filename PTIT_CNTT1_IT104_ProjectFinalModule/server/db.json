@@ -1,5 +1,113 @@
 {
   "users": [
-    
+    {
+      "boards": [
+        {
+          "id": "f7404378-4563-4f79-bef5-0122ae1af9b5",
+          "backdrop": {
+            "id": "1",
+            "type": "image",
+            "bgImage": "/images/mockImg1.jpg"
+          },
+          "title": "BALLOONN",
+          "is_create": "Tue Oct 07 2025 22:03:58 GMT+0700 (Indochina Time)",
+          "is_starred": false,
+          "description": "",
+          "lists": []
+        },
+        {
+          "id": "5924dc99-2b3f-447b-8b03-db1a3b185516",
+          "backdrop": {
+            "id": "3",
+            "type": "image",
+            "bgImage": "/images/mockImage3.jpg"
+          },
+          "title": "BEACHHH",
+          "is_create": "Tue Oct 07 2025 22:08:22 GMT+0700 (Indochina Time)",
+          "is_starred": false,
+          "description": "",
+          "lists": []
+        }
+      ],
+      "create_at": "Sun Oct 05 2025 01:28:35 GMT+0700 (Indochina Time)",
+      "email": "ppanh@gmail.com",
+      "id": "a3820cb7-6d24-4dca-ac94-51450afe1a0e",
+      "password": "ppanh123*",
+      "username": "ppanh_876"
+    },
+    {
+      "id": "6d5f8ef3-a04e-4ef7-aa42-9e16628e8c6a",
+      "username": "minhquan123",
+      "email": "mquan@gmail.com",
+      "password": "mquan123*",
+      "create_at": "Mon Oct 06 2025 08:38:02 GMT+0700 (Indochina Time)",
+      "boards": [
+        {
+          "id": "1",
+          "title": "Dự án Website",
+          "description": "Quản lý tiến độ dự án website",
+          "backdrop": {
+            "id": 1,
+            "type": "image",
+            "bgImage": "/images/mockImg1.jpg"
+          },
+          "is_starred": true,
+          "is_create": "2025-02-28T12:30:00Z",
+          "lists": []
+        },
+        {
+          "id": "2",
+          "title": "Ứng dụng Mobile",
+          "description": "Thiết kế và phát triển ứng dụng mobile",
+          "backdrop": {
+            "id": 2,
+            "type": "image",
+            "bgImage": "/images/mockImage2.jpg"
+          },
+          "is_starred": false,
+          "is_create": "2025-03-01T09:15:00Z",
+          "lists": []
+        },
+        {
+          "id": "3",
+          "title": "Hệ thống Quản lý",
+          "description": "Xây dựng hệ thống quản lý nội bộ",
+          "backdrop": {
+            "id": 3,
+            "type": "image",
+            "bgImage": "/images/mockImage3.jpg"
+          },
+          "is_starred": true,
+          "is_create": "2025-03-02T14:45:00Z",
+          "lists": []
+        },
+        {
+          "id": "4",
+          "title": "Dự án Thương mại điện tử",
+          "description": "Phát triển website bán hàng trực tuyến và hệ thống quản lý đơn hàng",
+          "backdrop": {
+            "id": 7,
+            "type": "gradient",
+            "bgImage": "linear-gradient(to right bottom, #00FF2F, #00FFC8)"
+          },
+          "is_starred": false,
+          "is_create": "2025-03-05T10:00:00Z",
+          "lists": []
+        },
+        {
+          "id": "5",
+          "title": "Nền tảng Học trực tuyến",
+          "description": "Thiết kế giao diện và chức năng cho hệ thống học trực tuyến",
+          "backdrop": {
+            "id": 9,
+            "type": "gradient",
+            "bgImage": "linear-gradient(to right bottom, #FFA200, #EDFA00)"
+          },
+          "is_starred": true,
+          "is_create": "2025-03-06T16:30:00Z",
+          "lists": []
+        }
+      ]
+    }
   ]
 }

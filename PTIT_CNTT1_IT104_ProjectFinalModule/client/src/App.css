@@ -125,3 +125,16 @@
     width: 70%;
   }
 }
+
+
+.editor-wrapper {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  background-color: #fff;
+}
+
+.inputListName::placeholder{
+  color: #626F86;
+  font-size: 14px;
+}

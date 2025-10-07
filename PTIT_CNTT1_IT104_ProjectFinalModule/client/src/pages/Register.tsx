@@ -1,24 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import trelloLogo from "../assets/trello_logo.png";
+import trelloLogo from "../images/trello_logo.png";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { notification } from "antd";
 import type { NotificationPlacement } from "antd/es/notification/interface";
 import type { User } from "../interfaces/board.interface";
+import { useAppDispatch, useAppSelector } from "../redux/reducHook/useHooks";
+import { addNewUser, getAllUser } from "../apis/user.data";
 
 export default function Register() {
-  const [users, setUsers] = useState<User[]>(() => {
-    const localClone = localStorage.getItem("userList");
-    return localClone ? JSON.parse(localClone) : [];
-  });
+  const dispatch = useAppDispatch();
+  const users = useAppSelector((state) => state.users.filterUser);
   type NotificationType = "success" | "info" | "warning" | "error";
-  const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
+  const navigate = useNavigate();
   const [inputUserName, setInputUserName] = useState<string>("");
   const [inputEmail, setInputEmail] = useState<string>("");
   const [inputPassword, setInputPassword] = useState<string>("");
+
+  // Gọi dispatch lấy dữ liệu API
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, [dispatch]);
+
   const showAlert = (
     placement: NotificationPlacement,
     inType: NotificationType,
@@ -61,7 +67,7 @@ export default function Register() {
 
   const handleRegister = () => {
     const inform: string[] = [];
-    const emailExist = users.find((user) => user.email === inputEmail)
+    const emailExist = users.find((user) => user.email === inputEmail);
     const hasSpecialChar = (text: string) => /[^a-zA-Z0-9\s]/.test(text);
     if (!inputUserName) {
       inform.push("Tên người dùng không để trống");
@@ -70,8 +76,8 @@ export default function Register() {
       inform.push("Email người dùng không để trống");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail)) {
       inform.push("Email không đúng định dạng");
-    }else if(emailExist){
-      inform.push("Email đã tồn tại")
+    } else if (emailExist) {
+      inform.push("Email đã tồn tại");
     }
 
     if (!inputPassword) {
@@ -91,9 +97,9 @@ export default function Register() {
       };
       showAlert("topLeft", "success", ["Đăng ký thành công"]);
       setTimeout(() => {
-        setUsers([...users, newUser]);
-        console.log(users);
+        console.log([...users, newUser]);
         localStorage.setItem("userList", JSON.stringify([...users, newUser]));
+        dispatch(addNewUser(newUser));
         navigate("/login");
       }, 1200);
     } else {

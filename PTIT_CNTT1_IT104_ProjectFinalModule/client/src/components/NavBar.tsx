@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import miniLogo from "../assets/mini_Trello.png";
-import searchBoard from "../assets/search_board.png";
-import menuSidebar from "../assets/menu_sidebar.png";
+import miniLogo from "/images/mini_Trello.png";
+import searchBoard from "/images/search_board.png";
+import menuSidebar from "/images/menu_sidebar.png";
 import Sidebar from "./Sidebar";
 import { Drawer } from "antd";
 import OriginNav from "./OriginNav";
@@ -22,6 +22,7 @@ export default function NavBar() {
       {/* header */}
       <div
         style={{
+          backgroundColor:"#F8F9FA",
           zIndex: 10,
           position: "relative",
         }}

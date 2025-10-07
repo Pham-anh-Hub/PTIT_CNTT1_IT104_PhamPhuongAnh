@@ -1,22 +1,27 @@
 import React from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import boardIcon from "../assets/boards_icon.png";
-import closeIcon from "../assets/closed_icon.png";
-import staredBoard from "../assets/starred_icon.png";
+import boardIcon from "/images/boards_icon.png";
+import closeIcon from "/images/closed_icon.png";
+import staredBoard from "/images/starred_icon.png";
+import type { User } from "../interfaces/board.interface";
 
 interface SidebarProp {
   open?: boolean;
   childrent: React.ReactNode;
 }
 export default function Sidebar({ open, childrent }: SidebarProp) {
-  const data = useParams();
+  const data = window.location.href;
   console.log(data);
+  const userLoggined = (): User | null => {
+    const cloneAccount = localStorage.getItem("userLoggined");
+    return cloneAccount ? JSON.parse(cloneAccount) : null;
+  };
 
   const navItems = [
-    { icon: boardIcon, label: "Boards", to: "/boards" },
-    { icon: staredBoard, label: "Starred Boards", to: "#" },
-    { icon: closeIcon, label: "Closed Boards", to: "#" },
+    { icon: boardIcon, label: "Boards", to: `/${userLoggined()?.id}/boards` },
+    { icon: staredBoard, label: "Starred Boards", to: `/${userLoggined()?.id}/starreds` },
+    { icon: closeIcon, label: "Closed Boards", to: "/" },
   ];
   return (
     <>
@@ -35,7 +40,11 @@ export default function Sidebar({ open, childrent }: SidebarProp) {
                 <li key={item.label}>
                   <NavLink
                     style={{ padding: "12px 16px" }}
-                    className="flex items-center gap-[8px] transition-all transform-border hover:opacity-60 hover:bg-gray-300"
+                    className={({ isActive }) =>
+                      `flex items-center gap-[8px] transition-all transform-border ${
+                        isActive ? "bg-gray-300 opacity-60" : ""
+                      }`
+                    }
                     to={item.to}
                   >
                     <img className="w-[16px] h-[16px]" src={item.icon} />{" "}

@@ -9,7 +9,7 @@ export interface Task {
     id: string
     title: string,
     description: string,
-    status: "idle" | "pending" | "completed"
+    status: "pending" | "completed" | string
     due_date: string,
     create_at: string
     tags: Label[]
@@ -24,8 +24,8 @@ export interface ListOfBoard {
 
 
 export interface Board {
-    backdrop: string,
-    id: number;
+    backdrop: {id : string,type : string, bgImage: string},
+    id: string;
     title: string;
     description: string;
     is_create: string;

@@ -1,15 +1,120 @@
-import React from "react";
-import trelloLogo from "../assets/trello_logo.png";
+import React, { useEffect, useState } from "react";
+import trelloLogo from "/images/trello_logo.png";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/reducHook/useHooks";
+import { notification } from "antd";
+import type { NotificationPlacement } from "antd/es/notification/interface";
+import type { User } from "../interfaces/board.interface";
+import { getAllUser } from "../apis/user.data";
 
 export default function Register() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const userList = useAppSelector((state) => state.users.filterUser);
+  const cloneLocal = localStorage.getItem("userLoggined");
+  const [userLoggined, setUserLoggined] = useState<User | undefined>(undefined);
   const label = { inputProps: { "aria-label": "Remember me" } };
+  const [rememberInfo, setRememberInfo] = useState<boolean>(false);
+  type NotificationType = "success" | "info" | "warning" | "error";
+  const [api, contextHolder] = notification.useNotification();
+  const [inputEmail, setInputEmail] = useState<string>( userLoggined ? userLoggined.email : "");
+  const [inputPassword, setInputPassword] = useState<string>(
+    userLoggined ? userLoggined.password : ""
+  );
+
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, [dispatch, cloneLocal]);
+
+  useEffect(() => {
+    if (cloneLocal) {
+      const dataParsed = JSON.parse(cloneLocal);
+      setUserLoggined(dataParsed);
+      setInputEmail(dataParsed.email);
+      setInputPassword(dataParsed.password);
+    }
+  }, []);
+
+  const showAlert = (
+    placement: NotificationPlacement,
+    inType: NotificationType,
+    inform: string[]
+  ) => {
+    api[inType]({
+      message: `${inType.toUpperCase()}`,
+      description: (
+        <>
+          {inform.map((p) => (
+            <p>{p}</p>
+          ))}
+        </>
+      ),
+      placement,
+      style:
+        inType === "error"
+          ? {
+              backgroundColor: "#FFF2F0",
+              border: "1px solid #FF0000",
+              borderRadius: "8px",
+            }
+          : {
+              backgroundColor: "#F6FFED",
+              border: "1px solid #B7EB8F",
+              borderRadius: "8px",
+            },
+    });
+  };
+  const rememberLogin = () => {
+    setRememberInfo(true);
+  };
+  const handleInputLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    console.log(name, "-", value);
+    if (name === "email") {
+      setInputEmail(value);
+    } else if (name === "password") {
+      setInputPassword(value);
+    }
+    setRememberInfo(rememberInfo);
+  };
+
+  const handleLogin = () => {
+    console.log(inputEmail, inputPassword, rememberInfo);
+
+    const inform: string[] = [];
+    const userExist = userList.find((user) => user.email === inputEmail);
+    if (!inputEmail) {
+      inform.push("Email không để trống");
+    } else if (!userExist) {
+      inform.push("Email không tồn tại");
+    }
+    if (!inputPassword) {
+      inform.push("Mật khẩu không để trống");
+    }else if(inputPassword !== userExist?.password){
+      inform.push("Mật khẩu không chính xác")
+    }
+    if (inform.length === 0) {
+      localStorage.setItem(
+        "remember",
+        JSON.stringify(rememberInfo ? true : false)
+      );
+      console.log(userExist);
+      localStorage.setItem("userLoggined", JSON.stringify(userExist));
+      showAlert("topRight", "success", ["Đăng nhập thành công"]);
+      setTimeout(() => {
+        navigate(`/${userExist?.id}`, {replace:true});
+      }, 1200);
+    } else {
+      showAlert("topRight", "error", inform);
+    }
+  };
 
   return (
     <>
+      {contextHolder}
       <div className="w-[100%] p-2">
         <div
           style={{ fontFamily: "Roboto, sans-serif", margin: "5% auto" }}
@@ -25,18 +130,25 @@ export default function Register() {
           </h1>
           <div className="w-[100%] flex flex-col gap-3">
             <TextField
+              value={inputEmail}
+              onChange={handleInputLogin}
               id="outlined-basic"
               label="Email address"
               variant="outlined"
+              name="email"
             />
             <TextField
+              value={inputPassword}
+              onChange={handleInputLogin}
               id="outlined-basic"
               label="Password"
               variant="outlined"
+              name="password"
+              type="password"
             />
           </div>
           <div className="flex items-center">
-            <Checkbox {...label} />
+            <Checkbox onChange={rememberLogin} {...label} />
             <p className="">Remember me</p>
           </div>
           <div>
@@ -48,6 +160,7 @@ export default function Register() {
             </u>
           </div>
           <Button
+            onClick={handleLogin}
             className="w-[100%]"
             type="button"
             variant="contained"
@@ -55,7 +168,9 @@ export default function Register() {
           >
             Sign in
           </Button>
-          <div className="text-[16px] text-[#212529BF] mt-[30%]">&#169; 2025 - By Rikkei Education</div>
+          <div className="text-[16px] text-[#212529BF] mt-[30%]">
+            &#169; 2025 - By Rikkei Education
+          </div>
         </div>
       </div>
 

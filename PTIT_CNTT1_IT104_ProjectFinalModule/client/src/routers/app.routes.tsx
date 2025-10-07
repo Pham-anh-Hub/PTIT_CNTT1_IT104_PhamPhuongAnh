@@ -1,12 +1,17 @@
 import React, { Suspense } from "react";
 import "../App.css";
-import { createBrowserRouter } from "react-router-dom";
-import WorksBoard from "../pages/WorksBoard";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 const Register = React.lazy(() => import("../pages/Register"));
 const Login = React.lazy(() => import("../pages/Login"));
 const Dashboard = React.lazy(() => import("../pages/Dashboard"));
-const BoardDetail = React.lazy(() => import("../pages/BoardDetail"))
+const BoardDetail = React.lazy(() => import("../pages/BoardDetail"));
+const WorksBoard = React.lazy(() => import("../pages/WorksBoard"));
+const ProtectRouter = React.lazy(() => import("./ProtectRouter"));
+const StarredBoards = React.lazy(() => import("../components/StarredBoards"));
+const WorkSpaceBoard = React.lazy(() => import("../components/WorkSpaceBoard"));
+
+const userLoggined = localStorage.getItem("userLoggined");
 
 export const routes = createBrowserRouter([
   {
@@ -33,23 +38,83 @@ export const routes = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <Suspense fallback={<div className="spinner-quadruple-arc"></div>}>
-          <Dashboard />
-        </Suspense>
+        <ProtectRouter>
+          <Suspense fallback={<div className="spinner-quadruple-arc"></div>}>
+            <Dashboard />
+          </Suspense>
+        </ProtectRouter>
       </>
     ),
     children: [
       {
-        index:true,
-        element:<WorksBoard/>
+        index: true,
+        element: (() => {
+          if (userLoggined) {
+            // Tức là đã login
+            const { id } = JSON.parse(userLoggined);
+            // chuyển hướng đến trang của ng dùng
+            return <Navigate to={`/${id}`} replace />;
+          }
+          return <Navigate to="/login" replace />;
+        })(), // Định nghĩa và chạy 1 hàm vô danh
       },
       {
-        path: "boards",
-        element: <WorksBoard />,
+        path: `/:userId`, // hoặc bỏ, chỉ cần index: true
+        element: (
+          <ProtectRouter>
+            <Suspense fallback={<div className="spinner-quadruple-arc"></div>}>
+              <WorksBoard />
+            </Suspense>
+          </ProtectRouter>
+        ),
+        children: [
+          {
+            index: true, // => /  (hiển thị WorksBoard mặc định)
+            element: (
+              <ProtectRouter>
+                <Suspense
+                  fallback={<div className="spinner-quadruple-arc"></div>}
+                >
+                  <WorkSpaceBoard />
+                </Suspense>
+              </ProtectRouter>
+            ),
+          },
+          {
+            path: "boards", // => /boards
+            element: (
+              <ProtectRouter>
+                <Suspense
+                  fallback={<div className="spinner-quadruple-arc"></div>}
+                >
+                  <WorkSpaceBoard />
+                </Suspense>
+              </ProtectRouter>
+            ),
+          },
+          {
+            path: "starreds", // => /starreds
+            element: (
+              <ProtectRouter>
+                <Suspense
+                  fallback={<div className="spinner-quadruple-arc"></div>}
+                >
+                  <StarredBoards />
+                </Suspense>
+              </ProtectRouter>
+            ),
+          },
+        ],
       },
       {
-        path: "boards/:boardId",
-        element: <BoardDetail />,
+        path: ":userId/boards/:boardId",
+        element: (
+          <ProtectRouter>
+            <Suspense fallback={<div className="spinner-quadruple-arc"></div>}>
+              <BoardDetail />
+            </Suspense>
+          </ProtectRouter>
+        ),
       },
     ],
   },

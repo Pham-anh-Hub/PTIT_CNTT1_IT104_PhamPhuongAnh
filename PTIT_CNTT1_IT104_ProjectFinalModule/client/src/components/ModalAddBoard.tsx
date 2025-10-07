@@ -1,13 +1,15 @@
-import { Alert, Button, Form, Input, Modal } from "antd";
+import { Button, Form, Input, message, Modal } from "antd";
 import React, { useEffect, useState } from "react";
-import mockImage1 from "../assets/mockImg1.jpg";
-import mockImage2 from "../assets/mockImage2.jpg";
-import mockImage3 from "../assets/mockImage3.jpg";
-import mockImage4 from "../assets/mockImg4.jpg";
-import uncheckedIcon from "../assets/uncheckIcon.png";
-import type { Board } from "../interfaces/board.interface";
+import { v4 as uuidv4 } from "uuid";
+import uncheckedIcon from "/images/uncheckIcon.png";
+import CloseModal from "/images/ClosedModal.png";
+import type { Board, User } from "../interfaces/board.interface";
+import { useAppDispatch } from "../redux/reducHook/useHooks";
+import { addNewBoard, editInfoBoard } from "../apis/user.data";
+import { useParams } from "react-router-dom";
 
 interface AddBoardProp {
+  userList: User[];
   editing?: Board;
   isModalOpen: boolean;
   setIsOpenModal: (value: boolean) => void;
@@ -16,98 +18,156 @@ type FieldType = {
   boardTitle?: string;
 };
 
+// Lấy dữ liệu người dùng đăng nhập từ local
+const userLoggined = (): User | null => {
+  const cloneAccount = localStorage.getItem("userLoggined");
+  return cloneAccount ? JSON.parse(cloneAccount) : null;
+};
+const currentUser: User | undefined = userLoggined() ?? undefined;
+
 export default function ModalAddBoard({
   isModalOpen,
   setIsOpenModal,
   editing,
 }: AddBoardProp) {
-  const templatesImg = [
-    {
-      id: 1,
-      image: mockImage1,
-    },
-    {
-      id: 2,
-      image: mockImage2,
-    },
-    {
-      id: 3,
-      image: mockImage3,
-    },
-    {
-      id: 4,
-      image: mockImage4,
-    },
-  ];
-  const colorsGradient = [
-    {
-      id: 5,
-      fColor: "#FFB100",
-      sColor: "#FA0C00",
-    },
-    {
-      id: 6,
-      fColor: "#2609FF",
-      sColor: "#D20CFF",
-    },
-    {
-      id: 7,
-      fColor: "#00FF2F",
-      sColor: "#00FFC8",
-    },
-    {
-      id: 8,
-      fColor: "#00FFE5",
-      sColor: "#004BFA",
-    },
-    {
-      id: 9,
-      fColor: "#FFA200",
-      sColor: "#EDFA00",
-    },
-    {
-      id: 10,
-      fColor: "#FF00EA",
-      sColor: "#FA0C00",
-    },
-  ];
+  const { userId } = useParams();
 
-  const [checked, setChecked] = useState<number>(
-    editing ? Number(editing.id) : 1
+  const [messageApi, contextHolder] = message.useMessage();
+  const templatesBackdrop = [
+    {
+      id: "1",
+      type: "image",
+      bgImage: "/images/mockImg1.jpg",
+    },
+    {
+      id: "2",
+      type: "image",
+      bgImage: "/images/mockImage2.jpg",
+    },
+    {
+      id: "3",
+      type: "image",
+      bgImage: "/images/mockImage3.jpg",
+    },
+    {
+      id: "4",
+      type: "image",
+      bgImage: "/images/mockImg4.jpg",
+    },
+    {
+      id: "5",
+      type: "gradient",
+      bgImage: "linear-gradient(to right bottom, #FFB100, #FA0C00)",
+    },
+    {
+      id: "6",
+      type: "gradient",
+      bgImage: "linear-gradient(to right bottom, #2609FF, #D20CFF)",
+    },
+    {
+      id: "7",
+      type: "gradient",
+      bgImage: "linear-gradient(to right bottom, #00FF2F, #00FFC8)",
+    },
+    {
+      id: "8",
+      type: "gradient",
+      bgImage: "linear-gradient(to right bottom, #00FFE5, #004BFA)",
+    },
+    {
+      id: "9",
+      type: "gradient",
+      bgImage: "linear-gradient(to right bottom, #FFA200, #EDFA00)",
+    },
+    {
+      id: "10",
+      type: "gradient",
+      bgImage: "linear-gradient(to right bottom, #FF00EA, #FA0C00)",
+    },
+  ];
+  const imageBackdrops = templatesBackdrop.filter((b) => b.type === "image");
+  const gradientBackdrops = templatesBackdrop.filter(
+    (b) => b.type === "gradient"
   );
+  const dispatch = useAppDispatch();
+  // const [editingBoard, setEditingBoard] = useState<Board | undefined>(editing)
+  const [checked, setChecked] = useState<string>(templatesBackdrop[0].bgImage);
   const [inputTitle, setInputTitle] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const [form] = Form.useForm();
+
   const handleAddBoard = () => {
-    const titleBoard = form.getFieldValue(inputTitle);
-    // xử lý tạo board
-    if (!titleBoard || !checked) {
-      console.log("Errorr");
-      <Alert
-        message="Error"
-        description="This is an error message about copywriting."
-        type="error"
-        showIcon
-      />;
+    console.log(inputTitle, checked);
+
+    if (!inputTitle) {
+      messageApi.open({
+        type: "error",
+        content: "Dữ liệu không để trống",
+      });
+      setError("error");
+      return;
+    }
+    const choosedBackdrop = templatesBackdrop.find(
+      (bg) => bg.bgImage === checked
+    );
+    if (currentUser) {
+      if (!editing) {
+        const newBoard: Board = {
+          id: uuidv4(),
+          backdrop: choosedBackdrop ?? templatesBackdrop[0],
+          title: inputTitle,
+          is_create: String(new Date()),
+          is_starred: false,
+          description: "",
+          lists: [],
+        };
+        dispatch(addNewBoard({ id: String(userId), newBoard: newBoard }));
+
+        localStorage.setItem(
+          "userLoggined",
+          JSON.stringify({
+            ...currentUser,
+            boards: [...currentUser.boards, newBoard],
+          })
+        );
+      } else {
+        const editBoard = {
+          ...editing,
+          title: inputTitle,
+          backdrop: choosedBackdrop ?? editing.backdrop,
+        };
+        console.log(editBoard);
+
+        dispatch(editInfoBoard({ id: String(userId), editBoard: editBoard }));
+        localStorage.setItem(
+          "userLoggined",
+          JSON.stringify({
+            ...currentUser,
+            boards: [...currentUser.boards, { ...editBoard }],
+          })
+        );
+      }
     }
 
-    setIsOpenModal(false); // đóng modal
+    setIsOpenModal(!isModalOpen); // đóng modal
     form.resetFields();
-    setChecked(1);
+    setChecked(templatesBackdrop[0].bgImage);
   };
   const handleCancelAdd = () => {
-    setIsOpenModal(false); // đóng modal
+    setIsOpenModal(!isModalOpen); // đóng modal
     form.resetFields();
-    setChecked(1);
+    setChecked(templatesBackdrop[0].bgImage);
   };
 
   useEffect(() => {
     if (editing) {
-      setChecked(Number(editing.id));
+      console.log(editing);
+      setChecked(editing.backdrop.bgImage);
       form.setFieldsValue({ boardTitle: editing.title });
     } else {
       form.resetFields();
     }
-  }, [editing]);
+  }, [editing, dispatch]);
 
   return (
     <>
@@ -117,17 +177,29 @@ export default function ModalAddBoard({
             Create Board
           </p>
         }
-        closable={true}
+        closeIcon={
+          <div onClick={handleCancelAdd}>
+            <img className="w-4 h-4" src={CloseModal} alt="" />
+          </div>
+        }
         open={isModalOpen}
-        onOk={handleAddBoard}
-        onCancel={handleCancelAdd}
         footer={
           <>
-            <Button variant="outlined" type="primary" color="danger">
+            <Button
+              onClick={handleCancelAdd}
+              variant="outlined"
+              type="primary"
+              color="danger"
+            >
               Close
             </Button>
-            <Button variant="outlined" type="primary" color="primary">
-              Create
+            <Button
+              onClick={handleAddBoard}
+              variant="outlined"
+              type="primary"
+              color="primary"
+            >
+              {editing ? "Save" : "Create"}
             </Button>
           </>
         }
@@ -144,9 +216,9 @@ export default function ModalAddBoard({
         <div>
           <h3 className="text-[20px] my-2">Background</h3>
           <ul className="grid grid-cols-4 gap-1">
-            {templatesImg.map((item, index) => (
+            {imageBackdrops.map((item, index) => (
               <li
-                onClick={() => setChecked(item.id)}
+                onClick={() => setChecked(item.bgImage)}
                 key={index}
                 style={{
                   display: "flex",
@@ -156,7 +228,7 @@ export default function ModalAddBoard({
                   width: "100%",
                   height: "60px",
                   borderRadius: "6px",
-                  backgroundImage: `url(${item.image})`,
+                  backgroundImage: `url(${item.bgImage})`,
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
@@ -164,7 +236,7 @@ export default function ModalAddBoard({
               >
                 <img
                   style={
-                    item.id === checked
+                    item.bgImage === checked
                       ? { backgroundColor: "#00FF00" }
                       : { backgroundColor: "transparent" }
                   }
@@ -187,24 +259,24 @@ export default function ModalAddBoard({
         <div>
           <h3 className="text-[20px] my-2">Color</h3>
           <ul className="grid grid-cols-6 gap-1">
-            {colorsGradient.map((item) => (
+            {gradientBackdrops.map((item) => (
               <li
-                onClick={() => setChecked(item.id)}
+                onClick={() => setChecked(item.bgImage)}
                 key={item.id}
                 style={{
                   display: "flex",
-                  cursor:"pointer",
+                  cursor: "pointer",
                   justifyContent: "center",
                   alignItems: "center",
                   width: "100%",
                   height: "50px",
                   borderRadius: "6px",
-                  backgroundImage: `linear-gradient(to right bottom, ${item.fColor}, ${item.sColor})`,
+                  backgroundImage: item.bgImage,
                 }}
               >
                 <img
                   style={
-                    item.id === checked
+                    item.bgImage === checked
                       ? { backgroundColor: "#00FF00" }
                       : { backgroundColor: "transparent" }
                   }
@@ -227,16 +299,21 @@ export default function ModalAddBoard({
           <Form.Item<FieldType>
             label={<h3 className="text-[20px] my-2">Board Title</h3>}
             name="boardTitle"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[{ required: true, message: "Please input board title!" }]}
           >
             <Input
-              onChange={(v) => setInputTitle(v.target.value)}
+              status={error !== "" ? "error" : ""}
+              onChange={(v) => {
+                setError("");
+                setInputTitle(v.target.value);
+              }}
               className="h-[50px]"
               placeholder="E.g. Shopping list for birthday..."
             />
           </Form.Item>
         </Form>
       </Modal>
+      {contextHolder}
     </>
   );
 }
