@@ -13,15 +13,13 @@ import { useAppSelector } from "../redux/reducHook/useHooks";
 
 export default function StarredBoards() {
    const { userId } = useParams();
-
   // Lấy danh sách user từ Redux
   const users: User[] = useAppSelector((state) => state.users.filterUser);
-
   // Tìm user hiện tại theo userId từ URL
   const currentUser = users.find((user) => user.id === userId);
-
   // Lấy danh sách boards của user hiện tại
   const workBoards: Board[] = currentUser?.boards ?? [];
+  const [modalStatus, setModalStatus] = useState<"add" | "edit">("add")
   const navigate = useNavigate();
   const [openAddBoard, setOpenAddBoard] = useState<boolean>(false);
   const [targetEdit, setTargetEdit] = useState<Board | undefined>(undefined);
@@ -31,20 +29,20 @@ export default function StarredBoards() {
     if (target) {
       setTargetEdit(target);
       setOpenAddBoard(true);
+      setModalStatus("edit")
     }
   };
 
   const handleDetailBoard = (id: string) => {
     const detail = workBoards.find((item) => item.id === id);
     if (detail) {
-      console.log(detail);
-      navigate(`/boards/${id}`);
+      navigate(`/${currentUser?.id}/boards/${id}`);
     }
   };
   return (
     <div>
       {/* Board List */}
-      <div className="flex items-center gap-2 py-[20px] mx-[20px] border-b-1 border-[#DEE2E6]">
+      <div className="flex items-center gap-2 py-[18px] mx-[20px] border-b-1 border-[#DEE2E6]">
         <img className="w-8 h-7" src={starIcon} alt="" />
         <p className="text-[30px] font-medium">Starred Boards</p>
       </div>
@@ -52,15 +50,16 @@ export default function StarredBoards() {
         <ul className="flex flex-wrap gap-4">
           {workBoards.map((board) => (
             <>
-              {board.is_starred ? (
+              {board.is_starred && !board.is_closed ? (
                 <>
                   <li
                     key={board.id}
                     onClick={() => handleDetailBoard(board.id)}
                     className="card-board"
                     style={{
+                      cursor:"pointer",
                       position: "relative",
-                      backgroundImage: `url(${board.backdrop.bgImage})`,
+                      backgroundImage: board.backdrop.type === "image" ? `url(${board.backdrop.bgImage})` : board.backdrop.bgImage,
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
                       backgroundSize: "cover",
@@ -103,6 +102,7 @@ export default function StarredBoards() {
       </div>
       {/* Các thành phần bên ngoài */}
       <ModalAddBoard
+      modalStatus={modalStatus}
         editing={targetEdit}
         isModalOpen={openAddBoard}
         setIsOpenModal={setOpenAddBoard}

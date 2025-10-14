@@ -115,7 +115,7 @@
 }
 
 /* mobile: 1 card 1 hàng */
-@media (max-width: 768px) {
+@media (max-width: 815px) {
   .card-board,
   .edit-button-card {
     flex: 1 1 calc(50% - 16px);
@@ -124,8 +124,14 @@
   .MUI-button {
     width: 70%;
   }
+  
 }
 
+@media (max-width: 1000px) {
+  #listBoard{
+    width: 100vw;
+  }
+}
 
 .editor-wrapper {
   border: 1px solid #ddd;

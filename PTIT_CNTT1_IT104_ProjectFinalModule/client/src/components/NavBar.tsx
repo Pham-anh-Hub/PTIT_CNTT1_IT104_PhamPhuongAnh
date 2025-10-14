@@ -25,8 +25,10 @@ export default function NavBar() {
           backgroundColor:"#F8F9FA",
           zIndex: 10,
           position: "relative",
+          overflowX:"hidden"
+          
         }}
-        className="flex w-full bg-[#F8F9FA] shadow-2xl"
+        className="flex w-full overflow-x-auto bg-[#F8F9FA] shadow-2xl"
       >
         <div className="flex flex-[1.001] justify-between">
           <img
@@ -36,7 +38,7 @@ export default function NavBar() {
           />
           <div className="border-r-1 border-gray-300"></div>
         </div>
-        <div className=" flex flex-[4] items-center justify-end gap-2.5 mr-3.5">
+        <div className=" flex flex-[4] items-center justify-end gap-2.5">
           <img className="searchIcon" src={searchBoard} alt="" />
           <img
             onClick={handleOpenSideBar}

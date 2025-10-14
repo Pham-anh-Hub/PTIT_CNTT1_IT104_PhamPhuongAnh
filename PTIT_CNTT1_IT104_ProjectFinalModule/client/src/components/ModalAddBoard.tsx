@@ -1,14 +1,15 @@
 import { Button, Form, Input, message, Modal } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import uncheckedIcon from "/images/uncheckIcon.png";
 import CloseModal from "/images/ClosedModal.png";
-import type { Board, User } from "../interfaces/board.interface";
+import { templatesBackdrop, type Board, type User } from "../interfaces/board.interface";
 import { useAppDispatch } from "../redux/reducHook/useHooks";
 import { addNewBoard, editInfoBoard } from "../apis/user.data";
 import { useParams } from "react-router-dom";
 
 interface AddBoardProp {
+  modalStatus: "edit" | "add";
   userList: User[];
   editing?: Board;
   isModalOpen: boolean;
@@ -29,76 +30,24 @@ export default function ModalAddBoard({
   isModalOpen,
   setIsOpenModal,
   editing,
+  modalStatus,
 }: AddBoardProp) {
   const { userId } = useParams();
 
   const [messageApi, contextHolder] = message.useMessage();
-  const templatesBackdrop = [
-    {
-      id: "1",
-      type: "image",
-      bgImage: "/images/mockImg1.jpg",
-    },
-    {
-      id: "2",
-      type: "image",
-      bgImage: "/images/mockImage2.jpg",
-    },
-    {
-      id: "3",
-      type: "image",
-      bgImage: "/images/mockImage3.jpg",
-    },
-    {
-      id: "4",
-      type: "image",
-      bgImage: "/images/mockImg4.jpg",
-    },
-    {
-      id: "5",
-      type: "gradient",
-      bgImage: "linear-gradient(to right bottom, #FFB100, #FA0C00)",
-    },
-    {
-      id: "6",
-      type: "gradient",
-      bgImage: "linear-gradient(to right bottom, #2609FF, #D20CFF)",
-    },
-    {
-      id: "7",
-      type: "gradient",
-      bgImage: "linear-gradient(to right bottom, #00FF2F, #00FFC8)",
-    },
-    {
-      id: "8",
-      type: "gradient",
-      bgImage: "linear-gradient(to right bottom, #00FFE5, #004BFA)",
-    },
-    {
-      id: "9",
-      type: "gradient",
-      bgImage: "linear-gradient(to right bottom, #FFA200, #EDFA00)",
-    },
-    {
-      id: "10",
-      type: "gradient",
-      bgImage: "linear-gradient(to right bottom, #FF00EA, #FA0C00)",
-    },
-  ];
+
   const imageBackdrops = templatesBackdrop.filter((b) => b.type === "image");
   const gradientBackdrops = templatesBackdrop.filter(
     (b) => b.type === "gradient"
   );
   const dispatch = useAppDispatch();
-  // const [editingBoard, setEditingBoard] = useState<Board | undefined>(editing)
   const [checked, setChecked] = useState<string>(templatesBackdrop[0].bgImage);
-  const [inputTitle, setInputTitle] = useState<string>("");
+  const [inputTitle, setInputTitle] = useState<string>(editing?.title ?? "");
   const [error, setError] = useState<string>("");
   const [form] = Form.useForm();
 
+  // Hàm thêm mới Board
   const handleAddBoard = () => {
-    console.log(inputTitle, checked);
-
     if (!inputTitle) {
       messageApi.open({
         type: "error",
@@ -110,64 +59,70 @@ export default function ModalAddBoard({
     const choosedBackdrop = templatesBackdrop.find(
       (bg) => bg.bgImage === checked
     );
-    if (currentUser) {
-      if (!editing) {
-        const newBoard: Board = {
-          id: uuidv4(),
-          backdrop: choosedBackdrop ?? templatesBackdrop[0],
-          title: inputTitle,
-          is_create: String(new Date()),
-          is_starred: false,
-          description: "",
-          lists: [],
-        };
-        dispatch(addNewBoard({ id: String(userId), newBoard: newBoard }));
-
-        localStorage.setItem(
-          "userLoggined",
-          JSON.stringify({
-            ...currentUser,
-            boards: [...currentUser.boards, newBoard],
-          })
-        );
-      } else {
-        const editBoard = {
-          ...editing,
-          title: inputTitle,
-          backdrop: choosedBackdrop ?? editing.backdrop,
-        };
-        console.log(editBoard);
-
-        dispatch(editInfoBoard({ id: String(userId), editBoard: editBoard }));
-        localStorage.setItem(
-          "userLoggined",
-          JSON.stringify({
-            ...currentUser,
-            boards: [...currentUser.boards, { ...editBoard }],
-          })
-        );
-      }
+    const newBoard: Board = {
+      id: uuidv4(),
+      backdrop: choosedBackdrop ?? templatesBackdrop[0],
+      title: inputTitle,
+      is_create: String(new Date()),
+      is_starred: false,
+      is_closed: false,
+      description: "",
+      lists: [],
+    };
+    if(currentUser){
+      dispatch(addNewBoard({ id: String(userId), newBoard }));
+      const updatedBoards = [...currentUser.boards, newBoard];
+      localStorage.setItem("userLoggined", JSON.stringify({ ...currentUser, boards: updatedBoards })
+      );
     }
-
     setIsOpenModal(!isModalOpen); // đóng modal
     form.resetFields();
     setChecked(templatesBackdrop[0].bgImage);
   };
+
+  // Hàm sửa thông tin board
+  const handleEditBoard = () => {
+    if (!inputTitle) {
+      messageApi.open({
+        type: "error",
+        content: "Dữ liệu không để trống",
+      });
+      setError("error");
+      return;
+    }
+    const choosedBackdrop = templatesBackdrop.find(
+      (bg) => bg.bgImage === checked
+    );
+    const editBoard : Board = {
+      ...editing as Board,
+      title: inputTitle,
+      backdrop: choosedBackdrop ?? editing?.backdrop ?? templatesBackdrop[0],
+    };
+    if (currentUser) {
+      dispatch(editInfoBoard({ id: String(userId), editBoard: editBoard }));
+      const updatedBoards = currentUser.boards.map((board) => board.id === editBoard.id ? { ...board, ...editBoard } : board);
+      localStorage.setItem("userLoggined",JSON.stringify({ ...currentUser, boards: updatedBoards }));
+    }
+    setIsOpenModal(!isModalOpen); // đóng modal
+    form.resetFields();
+    setChecked(templatesBackdrop[0].bgImage);
+  };
+
   const handleCancelAdd = () => {
     setIsOpenModal(!isModalOpen); // đóng modal
     form.resetFields();
     setChecked(templatesBackdrop[0].bgImage);
+    setError("")
   };
 
   useEffect(() => {
     if (editing) {
-      console.log(editing);
       setChecked(editing.backdrop.bgImage);
       form.setFieldsValue({ boardTitle: editing.title });
     } else {
       form.resetFields();
     }
-  }, [editing, dispatch]);
+  }, [editing, dispatch, form]);
 
   return (
     <>
@@ -194,12 +149,12 @@ export default function ModalAddBoard({
               Close
             </Button>
             <Button
-              onClick={handleAddBoard}
+              onClick={modalStatus === "edit" ? handleEditBoard : handleAddBoard}
               variant="outlined"
               type="primary"
               color="primary"
             >
-              {editing ? "Save" : "Create"}
+              {modalStatus === "edit" ? "Save" : "Create"}
             </Button>
           </>
         }

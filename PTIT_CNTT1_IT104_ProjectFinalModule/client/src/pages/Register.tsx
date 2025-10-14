@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import trelloLogo from "../images/trello_logo.png";
+import trelloLogo from "/images/trello_logo.png";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
@@ -74,7 +74,7 @@ export default function Register() {
     }
     if (!inputEmail) {
       inform.push("Email người dùng không để trống");
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail) || !inputEmail.includes("@gmail")) {
       inform.push("Email không đúng định dạng");
     } else if (emailExist) {
       inform.push("Email đã tồn tại");
@@ -97,7 +97,6 @@ export default function Register() {
       };
       showAlert("topLeft", "success", ["Đăng ký thành công"]);
       setTimeout(() => {
-        console.log([...users, newUser]);
         localStorage.setItem("userList", JSON.stringify([...users, newUser]));
         dispatch(addNewUser(newUser));
         navigate("/login");

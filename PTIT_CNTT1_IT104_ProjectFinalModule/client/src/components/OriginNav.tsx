@@ -1,4 +1,3 @@
-import React  from "react";
 import settingIcon from "/images/setting_icon.png";
 import signOutIcon from "/images/signOutIcon.png";
 import { NavLink, useNavigate } from "react-router-dom";

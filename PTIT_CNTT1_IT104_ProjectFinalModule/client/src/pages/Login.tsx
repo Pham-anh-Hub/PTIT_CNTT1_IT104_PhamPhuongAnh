@@ -72,7 +72,6 @@ export default function Register() {
   };
   const handleInputLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(name, "-", value);
     if (name === "email") {
       setInputEmail(value);
     } else if (name === "password") {
@@ -82,8 +81,6 @@ export default function Register() {
   };
 
   const handleLogin = () => {
-    console.log(inputEmail, inputPassword, rememberInfo);
-
     const inform: string[] = [];
     const userExist = userList.find((user) => user.email === inputEmail);
     if (!inputEmail) {
@@ -101,7 +98,6 @@ export default function Register() {
         "remember",
         JSON.stringify(rememberInfo ? true : false)
       );
-      console.log(userExist);
       localStorage.setItem("userLoggined", JSON.stringify(userExist));
       showAlert("topRight", "success", ["Đăng nhập thành công"]);
       setTimeout(() => {

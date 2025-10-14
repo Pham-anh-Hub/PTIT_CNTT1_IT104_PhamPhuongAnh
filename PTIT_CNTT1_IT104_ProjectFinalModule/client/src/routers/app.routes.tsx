@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import "../App.css";
 import { createBrowserRouter, Navigate } from "react-router-dom";
-
+const ClosedBoards = React.lazy(() => import("../components/ClosedBoard"));
 const Register = React.lazy(() => import("../pages/Register"));
 const Login = React.lazy(() => import("../pages/Login"));
 const Dashboard = React.lazy(() => import("../pages/Dashboard"));
@@ -10,10 +10,15 @@ const WorksBoard = React.lazy(() => import("../pages/WorksBoard"));
 const ProtectRouter = React.lazy(() => import("./ProtectRouter"));
 const StarredBoards = React.lazy(() => import("../components/StarredBoards"));
 const WorkSpaceBoard = React.lazy(() => import("../components/WorkSpaceBoard"));
+const NotFoundPage = React.lazy(() => import("../pages/NotFoundPage"));
 
 const userLoggined = localStorage.getItem("userLoggined");
 
 export const routes = createBrowserRouter([
+  {
+    path: "/*",
+    element: <NotFoundPage />,
+  },
   {
     path: "/login",
     element: (
@@ -47,7 +52,7 @@ export const routes = createBrowserRouter([
     ),
     children: [
       {
-        index: true,
+        path: "/",
         element: (() => {
           if (userLoggined) {
             // Tức là đã login
@@ -55,7 +60,7 @@ export const routes = createBrowserRouter([
             // chuyển hướng đến trang của ng dùng
             return <Navigate to={`/${id}`} replace />;
           }
-          return <Navigate to="/login" replace />;
+          return <Navigate to="/*" replace />;
         })(), // Định nghĩa và chạy 1 hàm vô danh
       },
       {
@@ -100,6 +105,18 @@ export const routes = createBrowserRouter([
                   fallback={<div className="spinner-quadruple-arc"></div>}
                 >
                   <StarredBoards />
+                </Suspense>
+              </ProtectRouter>
+            ),
+          },
+          {
+            path: "closeds", // => /closeds
+            element: (
+              <ProtectRouter>
+                <Suspense
+                  fallback={<div className="spinner-quadruple-arc"></div>}
+                >
+                  <ClosedBoards />
                 </Suspense>
               </ProtectRouter>
             ),

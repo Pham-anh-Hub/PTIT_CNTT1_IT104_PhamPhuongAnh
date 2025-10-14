@@ -11,8 +11,6 @@ interface SidebarProp {
   childrent: React.ReactNode;
 }
 export default function Sidebar({ open, childrent }: SidebarProp) {
-  const data = window.location.href;
-  console.log(data);
   const userLoggined = (): User | null => {
     const cloneAccount = localStorage.getItem("userLoggined");
     return cloneAccount ? JSON.parse(cloneAccount) : null;
@@ -21,13 +19,13 @@ export default function Sidebar({ open, childrent }: SidebarProp) {
   const navItems = [
     { icon: boardIcon, label: "Boards", to: `/${userLoggined()?.id}/boards` },
     { icon: staredBoard, label: "Starred Boards", to: `/${userLoggined()?.id}/starreds` },
-    { icon: closeIcon, label: "Closed Boards", to: "/" },
+    { icon: closeIcon, label: "Closed Boards", to: `/${userLoggined()?.id}/closeds` },
   ];
   return (
     <>
       <nav
         id="side-bar"
-        style={open ? { display: "flex", height: "calc(100vh - 56px)" } : {}}
+        style={open ? { display: "flex", height: "100%", width:"34vw"} : {}}
         className=" flex-[1] border-r-1 border-t-1 border-gray-300 bg-[#F8F9FA]"
       >
         <div className="flex flex-col gap-[16px]">

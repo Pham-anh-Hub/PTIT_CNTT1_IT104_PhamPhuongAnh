@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-import { DownOutlined, CalendarOutlined } from "@ant-design/icons";
 // Import Button của Material UI với tên khác (ví dụ: MUIButton)
 import listWorks from "/images/list_works.png";
 import editBoard from "/images/edit-board.png";
+import { DownOutlined, CalendarOutlined } from "@ant-design/icons";
+import { Button as AntButton, Dropdown } from "antd";
 import { ButtonGroup, Button as MUIButton } from "@mui/material";
 import ModalAddBoard from "./ModalAddBoard";
 import type { Board, User } from "../interfaces/board.interface";
 import { useNavigate, useParams } from "react-router-dom";
 import StarredBoards from "./StarredBoards";
-import { Button as AntButton, Dropdown } from "antd";
 import { useAppDispatch, useAppSelector } from "../redux/reducHook/useHooks";
 import { getAllUser } from "../apis/user.data";
 
@@ -27,6 +27,7 @@ export default function WorkSpaceBoard() {
   const workBoards: Board[] = currentUser?.boards ?? [];
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [modalStatus, setModalStatus] = useState<"add" | "edit">("add");
   const [openAddBoard, setOpenAddBoard] = useState<boolean>(false);
   const [targetEdit, setTargetEdit] = useState<Board | undefined>(undefined);
   const items = [
@@ -45,15 +46,14 @@ export default function WorkSpaceBoard() {
   const handleEditBoard = (id: string) => {
     const target = workBoards.find((board) => board.id === String(id));
     if (target) {
-      console.log(target);
       setTargetEdit(target);
       setOpenAddBoard(true);
+      setModalStatus("edit")
     }
   };
   const handleDetailBoard = (id: string) => {
     const detail = workBoards.find((item) => item.id === id);
     if (detail) {
-      console.log(detail);
       navigate(`/${currentUser?.id}/boards/${id}`);
     }
   };
@@ -94,7 +94,7 @@ export default function WorkSpaceBoard() {
       <div className="py-4 px-6">
         <ul className="flex flex-wrap gap-4">
           {workBoards
-            .filter((board) => !board.is_starred)
+            .filter((board) => !board.is_starred && !board.is_closed)
             .map((board) => (
               <li
                 key={board.id}
@@ -141,7 +141,7 @@ export default function WorkSpaceBoard() {
             ))}
           <li className="edit-button-card">
             <MUIButton
-              onClick={() => setOpenAddBoard(true)}
+              onClick={() => {setOpenAddBoard(true); setModalStatus("add")}}
               className="MUI-button"
               variant="outlined"
             >
@@ -154,6 +154,7 @@ export default function WorkSpaceBoard() {
       <StarredBoards />
       {/* Các thành phần bên ngoài */}
       <ModalAddBoard
+      modalStatus={modalStatus}
         userList={users}
         editing={targetEdit}
         isModalOpen={openAddBoard}
