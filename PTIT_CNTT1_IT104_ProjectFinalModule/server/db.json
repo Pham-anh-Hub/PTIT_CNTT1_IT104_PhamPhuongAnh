@@ -6,7 +6,71 @@
       "email": "ppanh@gmail.com",
       "password": "ppanh123*",
       "create_at": "Sun Oct 05 2025 01:28:35 GMT+0700 (Indochina Time)",
-      "boards": []
+      "boards": [
+        {
+          "id": "65f7f69b-08b8-4b0f-9b44-b7487fb4c0b6",
+          "backdrop": {
+            "id": "7",
+            "type": "gradient",
+            "bgImage": "linear-gradient(to right bottom, #00FF2F, #00FFC8)"
+          },
+          "title": "new board 1 edit",
+          "is_create": "Wed Oct 15 2025 08:22:14 GMT+0700 (Indochina Time)",
+          "is_starred": true,
+          "is_closed": false,
+          "description": "",
+          "lists": [
+            {
+              "id": "eb19342e-46cb-4298-adb8-f10c4b88b554",
+              "create_at": "Wed Oct 15 2025 08:22:26 GMT+0700 (Indochina Time)",
+              "title": "new list 1",
+              "tasks": [
+                {
+                  "id": "03a2a1dd-681f-4601-90cc-f2ef0dd93099",
+                  "title": "hohoho",
+                  "description": "",
+                  "status": "pending",
+                  "due_date": "",
+                  "create_at": "Wed Oct 15 2025 08:23:01 GMT+0700 (Indochina Time)",
+                  "tags": []
+                },
+                {
+                  "id": "5ecb242c-429f-4698-bb56-e7efc96e228b",
+                  "title": "hahaha",
+                  "description": "<p>mo ta cho nhiem vu</p>",
+                  "status": "completed",
+                  "due_date": "",
+                  "create_at": "Wed Oct 15 2025 08:22:42 GMT+0700 (Indochina Time)",
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "id": "bc24666a-c7ff-4ba2-9389-12be3fbe1fa7",
+              "create_at": "Wed Oct 15 2025 08:22:53 GMT+0700 (Indochina Time)",
+              "title": "new list 2",
+              "tasks": [
+                {
+                  "id": "ca066763-56a1-4c18-8a42-ec0b089d291a",
+                  "title": "hjhjhj",
+                  "description": "<p>mo ta</p>",
+                  "status": "completed",
+                  "due_date": "",
+                  "create_at": "Wed Oct 15 2025 08:22:32 GMT+0700 (Indochina Time)",
+                  "tags": [
+                    {
+                      "id": "33213916-7227-4e2a-ad31-2c8e841fdbec",
+                      "content": "new label",
+                      "color": "#BAF3DB",
+                      "status": "unchoose"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "6d5f8ef3-a04e-4ef7-aa42-9e16628e8c6a",
@@ -64,7 +128,7 @@
           },
           "is_create": "2025-02-28T12:30:00Z",
           "is_starred": false,
-          "is_closed": true,
+          "is_closed": false,
           "lists": [
             {
               "id": "8f36730e-4a3e-4320-9462-714df9fa70c0",
@@ -96,7 +160,7 @@
         },
         {
           "id": "3",
-          "title": "Hệ thống Quản lý Nhân sự",
+          "title": "Hệ thống HR",
           "description": "Xây dựng nền tảng quản lý hồ sơ và chấm công nhân viên.",
           "backdrop": {
             "id": "8",
@@ -113,10 +177,19 @@
               "create_at": "Wed Oct 08 2025 19:57:13 GMT+0700 (Indochina Time)",
               "tasks": [
                 {
+                  "id": "6f11f067-b9f1-4aec-a0b1-ad6cd91ae22b",
+                  "title": "tối ưuu",
+                  "description": "",
+                  "status": "completed",
+                  "due_date": "",
+                  "create_at": "Tue Oct 14 2025 18:34:42 GMT+0700 (Indochina Time)",
+                  "tags": []
+                },
+                {
                   "id": "fee2a348-88df-464d-9eba-2da6fe250db3",
                   "title": "Tạo module đăng nhập",
                   "description": "<p>Xây dựng chức năng xác thực tài khoản người dùng.</p>",
-                  "status": "pending",
+                  "status": "completed",
                   "due_date": "2025-10-16T17:00:00.000Z",
                   "create_at": "Tue Oct 14 2025 10:36:32 GMT+0700 (Indochina Time)",
                   "tags": [
@@ -158,6 +231,12 @@
                   "due_date": "",
                   "create_at": "Tue Oct 14 2025 09:35:06 GMT+0700 (Indochina Time)",
                   "tags": [
+                    {
+                      "id": "47ed14d9-7bd6-4c1c-9e42-ed6a26bfac29",
+                      "content": "new small task",
+                      "color": "#BAF3DB",
+                      "status": "unchoose"
+                    },
                     {
                       "id": "d9282230-90a0-4f13-b00e-23da64e6b546",
                       "content": "performance",
@@ -247,20 +326,123 @@
       ]
     },
     {
-      "id": "173196f4-2733-4c41-b6ef-c2fa02a72147",
-      "username": "ppanh_876",
-      "email": "ppanh@g.com",
-      "password": "12345678@",
-      "create_at": "Wed Oct 08 2025 07:09:26 GMT+0700 (Indochina Time)",
-      "boards": []
+      "id": "c4b1316b-57ac-453a-92fe-12fa512b4241",
+      "username": "linthuuu",
+      "email": "linhthu@gmail.com",
+      "password": "linthu123*",
+      "create_at": "Tue Oct 14 2025 22:27:24 GMT+0700 (Indochina Time)",
+      "boards": [
+        {
+          "id": "aa274ff8-1c47-409a-8454-5377a9a716b3",
+          "backdrop": {
+            "id": "1",
+            "type": "image",
+            "bgImage": "/images/mockImg1.jpg"
+          },
+          "title": "Dự án quản lý sự kiện cá nhân",
+          "is_create": "Tue Oct 14 2025 22:28:40 GMT+0700 (Indochina Time)",
+          "is_starred": false,
+          "is_closed": false,
+          "description": "",
+          "lists": [
+            {
+              "id": "0667c82d-4f78-4401-a48a-de377d50617f",
+              "create_at": "Tue Oct 14 2025 22:28:58 GMT+0700 (Indochina Time)",
+              "title": "todolistttt",
+              "tasks": []
+            },
+            {
+              "id": "dcfbeb6e-46e0-457a-808b-cfd52e3f0734",
+              "create_at": "Tue Oct 14 2025 23:10:03 GMT+0700 (Indochina Time)",
+              "title": "new List",
+              "tasks": [
+                {
+                  "id": "31dcfbc9-80d7-4f27-bec1-7b6a79a454f0",
+                  "title": "newww nhe",
+                  "description": "",
+                  "status": "pending",
+                  "due_date": "",
+                  "create_at": "Tue Oct 14 2025 23:12:34 GMT+0700 (Indochina Time)",
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
-      "id": "2e34ac72-e547-4001-a0c4-4c4fdbb33979",
-      "username": "ppanh_876",
+      "id": "e9579562-c5ef-4a3d-a576-2462aa26f0f4",
+      "username": "NguyenVanA",
       "email": "nva@gmail.com",
-      "password": "12345678@",
-      "create_at": "Wed Oct 08 2025 07:14:07 GMT+0700 (Indochina Time)",
-      "boards": []
+      "password": "12345678*",
+      "create_at": "Wed Oct 15 2025 08:54:55 GMT+0700 (Indochina Time)",
+      "boards": [
+        {
+          "id": "cf70944d-8d4e-4a7e-865c-79b488c4a59b",
+          "backdrop": {
+            "id": "2",
+            "type": "image",
+            "bgImage": "/images/mockImage2.jpg"
+          },
+          "title": "board 2",
+          "is_create": "Wed Oct 15 2025 08:58:10 GMT+0700 (Indochina Time)",
+          "is_starred": true,
+          "is_closed": false,
+          "description": "",
+          "lists": []
+        },
+        {
+          "id": "8ab6eff5-3588-42cd-93ca-68f6e59a8236",
+          "backdrop": {
+            "id": "1",
+            "type": "image",
+            "bgImage": "/images/mockImg1.jpg"
+          },
+          "title": "new board edited",
+          "is_create": "Wed Oct 15 2025 08:56:39 GMT+0700 (Indochina Time)",
+          "is_starred": false,
+          "is_closed": false,
+          "description": "",
+          "lists": [
+            {
+              "id": "e3154c56-67e7-4cee-8792-073b997e483f",
+              "create_at": "Wed Oct 15 2025 09:00:27 GMT+0700 (Indochina Time)",
+              "title": "new list",
+              "tasks": []
+            },
+            {
+              "id": "45fe6ad7-73d9-4c79-946f-f48dd3b85b4b",
+              "create_at": "Wed Oct 15 2025 09:00:45 GMT+0700 (Indochina Time)",
+              "title": "list 2 edit",
+              "tasks": [
+                {
+                  "id": "a5111206-7a01-466d-bd63-864ea263fcb2",
+                  "title": "card 1",
+                  "description": "<p>mo ta</p>",
+                  "status": "completed",
+                  "due_date": "",
+                  "create_at": "Wed Oct 15 2025 09:00:34 GMT+0700 (Indochina Time)",
+                  "tags": [
+                    {
+                      "id": "0647d1e0-d6c7-4fa4-9b00-618594db8346",
+                      "content": "new label 2",
+                      "color": "#BAF3DB",
+                      "status": "choose"
+                    },
+                    {
+                      "id": "c1d6a6f7-6f98-43e9-9cb6-98bfa89ced0e",
+                      "content": "new label",
+                      "color": "#FEDEC8",
+                      "status": "choose"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

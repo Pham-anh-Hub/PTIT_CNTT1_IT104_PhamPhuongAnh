@@ -131,6 +131,7 @@ export default function Register() {
               variant="outlined"
             />
             <TextField
+            
               onChange={handleInputSignUp}
               name="username"
               id="outlined-basic"
@@ -140,6 +141,7 @@ export default function Register() {
             <TextField
               onChange={handleInputSignUp}
               name="password"
+              type="password"
               id="outlined-basic"
               label="Password"
               variant="outlined"

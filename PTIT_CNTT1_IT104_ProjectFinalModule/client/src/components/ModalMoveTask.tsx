@@ -18,7 +18,7 @@ type TaskProp = {
   handleCancel: () => void;
   currentListTask?: ListOfBoard;
   currentTask?: Task;
-  setCurrentList: (value : string) => void
+  setCurrentList: (value: string) => void;
 };
 
 type ListValue = {
@@ -27,13 +27,18 @@ type ListValue = {
   id: string;
 };
 
+type IndexList = {
+  label: string;
+  value : number;
+}
+
 export default function ModalMoveTask({
   isModalOpen,
   setIsModalOpen,
   handleCancel,
   currentListTask,
   currentTask,
-  setCurrentList
+  setCurrentList,
 }: TaskProp) {
   const dispatch = useAppDispatch();
   const { userId, boardId } = useParams();
@@ -44,6 +49,11 @@ export default function ModalMoveTask({
     const currBoard = workBoards.find((board) => board.id === boardId);
     return currBoard;
   });
+  const [targetIndex] = useState<number>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [srcList, _setSrcList] = useState(currentListTask); // disable eslint cho lỗi không dùng đến
+  const [distList, setDistList] = useState<ListOfBoard | undefined>(currentListTask);
+  const [titleBoard, setTitleBoard] = useState(currentBoard?.title);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [listValues, _setListValues] = useState<ListValue[]>(() => {
     const values: ListValue[] = [];
@@ -54,24 +64,37 @@ export default function ModalMoveTask({
     }
     return values ? values : [];
   }); // Disable eslint cho lỗi không dùng đến
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars 
-  const [srcList, _setSrcList] = useState(currentListTask); // disable eslint cho lỗi không dùng đến
-  const [distList, setDistList] = useState(currentListTask);
-  const [titleBoard, setTitleBoard] = useState(currentBoard?.title);
+
+  const [indexValues] = useState<IndexList[]>(() => {
+    const values: IndexList[] = [];
+    if(distList){
+      distList.tasks.forEach((_task: Task, index: number) => {
+        values.push({label:`${index}`, value: index});
+      });
+      return values;
+    }
+    return []
+  });
 
   const handleChange = (value: string, option?: ListValue | ListValue[]) => {
-    if (!option || Array.isArray(option)) return;  
-    console.log(option);
-      const targetList = currentBoard?.lists.find(
-        (list: ListOfBoard) => list.id === option.id
-      );
-      if (targetList) {
-        setDistList(targetList); // List đích
-      }
+    if (!option || Array.isArray(option)) return;
+    const targetList = currentBoard?.lists.find(
+      (list: ListOfBoard) => list.id === option.id
+    );
+    if (targetList) {
+      setDistList(targetList); // List đích
+    }
+  };
+  const handleChooseIndex = (value: number) => {
+    // if(value){
+    //   setTargetIndex(value)
+    // }
+    console.log(value);
+    
   };
 
   const onMoveCard = () => {
-    console.log(srcList, " - ", distList, " - ", titleBoard);
+    console.log(srcList, " - ", distList, " - ", titleBoard, " - ", targetIndex);
     if (!titleBoard) {
       return;
     }
@@ -86,7 +109,7 @@ export default function ModalMoveTask({
           targetTask: currentTask,
         })
       );
-      setCurrentList(distList.title)
+      setCurrentList(distList.title);
       setIsModalOpen(false);
     }
   };
@@ -141,13 +164,20 @@ export default function ModalMoveTask({
           <div>
             <div>
               <p className="font-bold text-[18px] text-[#172B4D]">List</p>
-
-              <Select
-                defaultValue={currentListTask?.title}
-                style={{ height: 56, width: "100%" }}
-                onChange={handleChange}
-                options={listValues}
-              />
+              <div className="flex gap-2">
+                <Select
+                  defaultValue={currentListTask?.title}
+                  style={{ height: 56, width: "75%" }}
+                  onChange={handleChange}
+                  options={listValues}
+                />
+                <Select
+                  defaultValue={null}
+                  style={{ height: 56, width: "25%" }}
+                  onChange={handleChooseIndex}
+                  options={indexValues}
+                />
+              </div>
             </div>
           </div>
         </div>

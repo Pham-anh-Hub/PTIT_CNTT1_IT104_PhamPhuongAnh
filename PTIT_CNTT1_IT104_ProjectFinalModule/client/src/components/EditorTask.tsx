@@ -43,7 +43,7 @@ type taskProp = {
 export default function EditorTask({
   targetTask,
   currenListTask,
-  isModalOpen,
+  // isModalOpen,
   setIsModalOpen,
 }: taskProp) {
   const dispatch = useAppDispatch();
@@ -86,7 +86,7 @@ export default function EditorTask({
     setContent(newContent);
   };
 
-  const handleOk =  async () => {
+  const handleOk = async () => {
     if (!content) {
       setModelError(true);
       messageApi.open({
@@ -94,20 +94,26 @@ export default function EditorTask({
         content: "Mô tả nhiệm vụ không được để trống",
       });
       return;
-    }else if(!inputTaskTitle){
+    } else if (!inputTaskTitle) {
       setError(true);
       messageApi.open({
         type: "error",
         content: "Tên công việc không được để trống",
       });
-      return
+      return;
     }
     // dispatch gồm userId, boardId, listId, taskId vaf description của task
-    const cloneCurrUser : User = await (await axiosInstance.get(`/users/${userId}`)).data
+    const cloneCurrUser: User = await (
+      await axiosInstance.get(`/users/${userId}`)
+    ).data;
     console.log(cloneCurrUser);
-    const currBoard = cloneCurrUser.boards.find((board) => board.id === currentBoard?.id)
-    const currList = currBoard?.lists.find((list) => list.id === currenListTask?.id)
-    const currTask = currList?.tasks.find((task) => task.id === targetTask?.id)
+    const currBoard = cloneCurrUser.boards.find(
+      (board) => board.id === currentBoard?.id
+    );
+    const currList = currBoard?.lists.find(
+      (list) => list.id === currenListTask?.id
+    );
+    const currTask = currList?.tasks.find((task) => task.id === targetTask?.id);
 
     if (userId && boardId && currTask && currBoard && currList) {
       const updatedTasks = currList.tasks.map((task: Task) =>
@@ -124,8 +130,7 @@ export default function EditorTask({
           : board
       );
       console.log(updatedBoards);
-     
-      
+
       dispatch(
         updateTaskTitleDescription({
           userId,
@@ -179,7 +184,8 @@ export default function EditorTask({
 
   const handleTickTask = () => {
     setTaskStatus(taskStatus === "pending" ? "completed" : "pending");
-    if (userId && boardId && currenListTask && targetTask)
+
+    if (userId && boardId && currenListTask && targetTask) {
       dispatch(
         onTickTask({
           userId,
@@ -188,7 +194,7 @@ export default function EditorTask({
           taskId: targetTask.id,
         })
       );
-    // setIsModalOpen(false);
+    }
   };
 
   const openDetailTaskLabels = () => {

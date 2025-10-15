@@ -7,31 +7,34 @@ export const getAllUser = createAsyncThunk("users/getAllUser", async () => {
     return response.data
 })
 
+// Thao tác thêm mới user khi đăng kí
 export const addNewUser = createAsyncThunk("users/addNewUser", async (newUser: User) => {
     const response = await axiosInstance.post("/users", newUser)
     return response.data // trả về phần tử được thêm
 })
+
+// Thao tác thêm mới board
 export const addNewBoard = createAsyncThunk("users/addNewBoard", async ({ id, newBoard }: { id: string; newBoard: Board }) => {
     try {
         // Lấy user hiện tại
         const user = (await axiosInstance.get(`/users/${id}`)).data;
-
         // Tạo bản cập nhật mới
         const updatedUser: User = {
             ...user,
             boards: [newBoard, ...user.boards],
+            // cập nhật user với thuộc tính board thêm lên đầu
         };
-
         // Gửi PUT để cập nhật toàn bộ user
         const response = await axiosInstance.put(`/users/${id}`, updatedUser);
 
-        return response.data; // ✅ Trả về user đã cập nhật
+        return response.data; // Trả về user đã cập nhật
     } catch (error) {
         return error
     }
 }
 );
 
+// Thao tác sửa thông tin board
 export const editInfoBoard = createAsyncThunk("user/editInfoBoard", async ({ id, editBoard }: { id: string, editBoard: Board }) => {
     try {
         // Lấy user hiện tại
@@ -41,6 +44,7 @@ export const editInfoBoard = createAsyncThunk("user/editInfoBoard", async ({ id,
         const updatedUser: User = {
             ...user,
             boards: [...updatedBoards]
+            // Cập nhật user hiện tạo với thuộc tính board đã được cập nhật thông tin (bao gồm backdrop và title)
         };
         // Gửi PUT để cập nhật toàn bộ user
         const response = await axiosInstance.put(`/users/${id}`, updatedUser);
@@ -50,7 +54,7 @@ export const editInfoBoard = createAsyncThunk("user/editInfoBoard", async ({ id,
     }
 })
 
-
+// Thao tác đóng board (đóng board đang mở - thay đổi trạng thái)
 export const closeTheBoard = createAsyncThunk("user/closeTheBoard", async ({ userId, boardId }: { userId: string, boardId: string }) => {
     try {
         const currentUser = (await axiosInstance.get(`/users/${userId}`)).data
@@ -66,6 +70,7 @@ export const closeTheBoard = createAsyncThunk("user/closeTheBoard", async ({ use
     }
 })
 
+// Thao tác mở lại các board đã đóng
 export const reOpenBoard = createAsyncThunk("user/reOpenBoard", async ({userId, reOpens}: {userId: string, reOpens : Board[]}) => {
     try {
         const currentUser : User = (await axiosInstance.get(`/users/${userId}`)).data
@@ -76,6 +81,7 @@ export const reOpenBoard = createAsyncThunk("user/reOpenBoard", async ({userId, 
     }
 })
 
+// Thao tác xóa board
 export const deleteBoard = createAsyncThunk("user/deleteBoard" , async ({userId, deletedBoards} : {userId: string, deletedBoards: Board[]}) =>{
     try {
         const currentUser : User = (await axiosInstance.get(`/users/${userId}`)).data
@@ -86,6 +92,7 @@ export const deleteBoard = createAsyncThunk("user/deleteBoard" , async ({userId,
     }
 })
 
+// Thao tác đánh dấu sao cho board
 export const starredTheBoard = createAsyncThunk("user/starredTheBoard", async ({ userId, boardId }: { userId: string, boardId: string }) => {
     try {
         const currentUser = (await axiosInstance.get(`/users/${userId}`)).data
@@ -107,6 +114,7 @@ export const addListToBoard = createAsyncThunk("user/addListToBoard", async ({ u
     try {
         const currentUser = (await axiosInstance.get(`/users/${userId}`)).data
         const updatedBoards = currentUser.boards.map((board: Board) => board.id === boardId ? { ...board, ...addedBoard } : board)
+        // Cập nhật lại danh sách board bao gồm board được cập nhật đã thêm list mới : bao gồm giữ nguyên các thuộc tính cũ của board và cập nhật các thuộc tính của board đã được thêm list
         const updatedUser: User = {
             ...currentUser, boards: updatedBoards
         }
@@ -117,7 +125,7 @@ export const addListToBoard = createAsyncThunk("user/addListToBoard", async ({ u
     }
 })
 
-
+// Xóa list 
 export const deleteListInBoard = createAsyncThunk("user/deleteListInBoard", async ({ userId, boardId, listId }: { userId: string, boardId: string, listId: string }) => {
     try {
         const currentUser = (await axiosInstance.get(`/users/${userId}`)).data
@@ -132,6 +140,7 @@ export const deleteListInBoard = createAsyncThunk("user/deleteListInBoard", asyn
     }
 })
 
+// Thay đổi tiêu đề của list cụ thể
 export const onEditListTitle = createAsyncThunk("user/editListTitle", async ({ userId, boardId, listId, newTitle, }: { userId: string, boardId: string, listId: string, newTitle: string }) => {
     try {
 
@@ -155,7 +164,7 @@ export const addNewTaskToList = createAsyncThunk("user/addNewTaskToList", async 
         const currentUser: User = (await axiosInstance.get(`/users/${userId}`)).data
         // Lấy ra board hiện tại trong danh sách board của currentUser
         const currentBoard = currentUser.boards.find((board: Board) => board.id === boardId)
-        // Lấy ra list của Boards của người dùng hiện tại
+        // Lấy ra list của Boards của người dùng hiện tại --> cập nhật lại list đó (thêm mới task) theo id 
         // const currentList = currentBoard?.lists.find((list : ListOfBoard) => list.id === listId)
         // Tiến hành thêm task vào list
         const updateLists = currentBoard?.lists.map((list: ListOfBoard) => list.id === listId ? { ...list, tasks: [newTask, ...list.tasks] } : list)
@@ -168,7 +177,7 @@ export const addNewTaskToList = createAsyncThunk("user/addNewTaskToList", async 
     }
 })
 
-// Xóa task
+// Xóa task                                     action type prefix -> RTK sẽ tự động sinh ra 3 action type dựa trên prefix này (pending, rejected, fullfill) 
 export const deleteTaskInList = createAsyncThunk("user/deleteTaskInList", async ({ userId, boardId, listId, taskId }: { userId: string, boardId: string, listId: string, taskId: string }) => {
     try {
         const currentUser: User = (await axiosInstance.get(`/users/${userId}`)).data
