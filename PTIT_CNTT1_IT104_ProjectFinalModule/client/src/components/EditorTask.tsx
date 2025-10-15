@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import DoneTask from "/images/doneTickIcon.png";
 import TickTask from "/images/tickIcon.png";
 import LabelIcon from "/images/Label.png";
@@ -62,6 +62,8 @@ export default function EditorTask({
   const [modelError, setModelError] = useState(false);
   const [takeDueDate, setTakeDueDate] = useState(false);
   const [error, setError] = useState(false);
+  console.log(error);
+  
   const [isMoveCard, setIsMoveCard] = useState(false);
   const [openTaskLabels, setOpenTaskLabels] = useState(false);
   const [content, setContent] = useState<string>("");

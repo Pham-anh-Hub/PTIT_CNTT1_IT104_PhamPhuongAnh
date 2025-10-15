@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Import Button của Material UI với tên khác (ví dụ: MUIButton)
 import listWorks from "/images/list_works.png";
@@ -21,7 +21,7 @@ export default function WorkSpaceBoard() {
   const users: User[] = useAppSelector((state) => state.users.filterUser);
 
   // Tìm user hiện tại theo userId từ URL
-  const currentUser = users.find((user) => user.id === userId);
+  const currentUser = users?.find((user) => user.id === userId);
 
   // Lấy danh sách boards của user hiện tại
   const workBoards: Board[] = currentUser?.boards ?? [];

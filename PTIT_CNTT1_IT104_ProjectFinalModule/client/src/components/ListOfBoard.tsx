@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import dots from "/images/dots.png";
 import iconX from "/images/X_icon.png";
 import addBoard from "/images/addBoardIcon.png";

@@ -3,7 +3,7 @@ import { Modal } from "antd";
 import clockIcon from "/images/clockIcon.png";
 import calender from "/images/calenderIcon.png";
 import labelIcon from "/images/LabelGray.png";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/reducHook/useHooks";
 import { useParams } from "react-router-dom";
 import type { Board, Label, User } from "../interfaces/board.interface";

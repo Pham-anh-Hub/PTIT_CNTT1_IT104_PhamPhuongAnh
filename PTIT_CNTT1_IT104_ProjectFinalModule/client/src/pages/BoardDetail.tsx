@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import tableIcon from "/images/tableIcon.png";
 import blackCloseIcon from "/images/closed_black_icon.png";
 import filterIcon from "/images/filter.png";

@@ -3,7 +3,7 @@ import { Modal } from "antd";
 import ReturnIcon from "/images/returnVector.png";
 import CloseIcon from "/images/ClosedModal.png";
 import LabelBgChoice from "/images/uncheckIcon.png";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import {
   templateLabelTask,
   type Board,

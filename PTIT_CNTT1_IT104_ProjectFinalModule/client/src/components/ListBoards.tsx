@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import addBoard from "/images/addBoardIcon.png";
 import { NavLink, useParams } from "react-router-dom";

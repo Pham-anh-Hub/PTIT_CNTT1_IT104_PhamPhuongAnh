@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import starIcon from "/images/star_icon.png";
 // Import Button của Material UI với tên khác (ví dụ: MUIButton)

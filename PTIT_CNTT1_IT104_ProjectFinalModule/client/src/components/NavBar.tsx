@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import miniLogo from "/images/mini_Trello.png";
 import searchBoard from "/images/search_board.png";
 import menuSidebar from "/images/menu_sidebar.png";

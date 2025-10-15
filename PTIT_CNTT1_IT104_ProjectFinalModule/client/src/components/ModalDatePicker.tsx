@@ -1,5 +1,5 @@
 import { Input, Modal, notification } from "antd";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import CloseModal from "/images/ClosedModalGray.png";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
