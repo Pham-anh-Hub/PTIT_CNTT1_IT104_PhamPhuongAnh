@@ -1,0 +1,456 @@
+{
+  "users": [
+    {
+      "id": "a3820cb7-6d24-4dca-ac94-51450afe1a0e",
+      "username": "ppanh_876",
+      "email": "ppanh@gmail.com",
+      "password": "ppanh123*",
+      "create_at": "Sun Oct 05 2025 01:28:35 GMT+0700 (Indochina Time)",
+      "boards": [
+        {
+          "id": "65f7f69b-08b8-4b0f-9b44-b7487fb4c0b6",
+          "backdrop": {
+            "id": "7",
+            "type": "gradient",
+            "bgImage": "linear-gradient(to right bottom, #00FF2F, #00FFC8)"
+          },
+          "title": "new board 1 edit",
+          "is_create": "Wed Oct 15 2025 08:22:14 GMT+0700 (Indochina Time)",
+          "is_starred": true,
+          "is_closed": false,
+          "description": "",
+          "lists": [
+            {
+              "id": "eb19342e-46cb-4298-adb8-f10c4b88b554",
+              "create_at": "Wed Oct 15 2025 08:22:26 GMT+0700 (Indochina Time)",
+              "title": "new list 1",
+              "tasks": [
+                {
+                  "id": "03a2a1dd-681f-4601-90cc-f2ef0dd93099",
+                  "title": "hohoho",
+                  "description": "",
+                  "status": "pending",
+                  "due_date": "",
+                  "create_at": "Wed Oct 15 2025 08:23:01 GMT+0700 (Indochina Time)",
+                  "tags": []
+                },
+                {
+                  "id": "5ecb242c-429f-4698-bb56-e7efc96e228b",
+                  "title": "hahaha",
+                  "description": "<p>mo ta cho nhiem vu</p>",
+                  "status": "completed",
+                  "due_date": "",
+                  "create_at": "Wed Oct 15 2025 08:22:42 GMT+0700 (Indochina Time)",
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "id": "bc24666a-c7ff-4ba2-9389-12be3fbe1fa7",
+              "create_at": "Wed Oct 15 2025 08:22:53 GMT+0700 (Indochina Time)",
+              "title": "new list 2",
+              "tasks": [
+                {
+                  "id": "ca066763-56a1-4c18-8a42-ec0b089d291a",
+                  "title": "hjhjhj",
+                  "description": "<p>mo ta</p>",
+                  "status": "completed",
+                  "due_date": "",
+                  "create_at": "Wed Oct 15 2025 08:22:32 GMT+0700 (Indochina Time)",
+                  "tags": [
+                    {
+                      "id": "33213916-7227-4e2a-ad31-2c8e841fdbec",
+                      "content": "new label",
+                      "color": "#BAF3DB",
+                      "status": "unchoose"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6d5f8ef3-a04e-4ef7-aa42-9e16628e8c6a",
+      "username": "minhquan123",
+      "email": "mquan@gmail.com",
+      "password": "mquan123*",
+      "create_at": "Mon Oct 06 2025 08:38:02 GMT+0700 (Indochina Time)",
+      "boards": [
+        {
+          "id": "5e4ed9b5-97bf-4641-8c4f-d275d1afbf98",
+          "title": "Thiết kế trang chủ sản phẩm",
+          "description": "Xây dựng giao diện chính cho trang chủ website giới thiệu sản phẩm.",
+          "backdrop": {
+            "id": "3",
+            "type": "image",
+            "bgImage": "/images/mockImage3.jpg"
+          },
+          "is_create": "Mon Oct 13 2025 22:59:00 GMT+0700 (Indochina Time)",
+          "is_starred": false,
+          "is_closed": false,
+          "lists": [
+            {
+              "id": "8e4131d6-fb2d-4704-bda9-0207f8181e52",
+              "create_at": "Tue Oct 14 2025 17:31:53 GMT+0700 (Indochina Time)",
+              "title": "design todo",
+              "tasks": [
+                {
+                  "id": "6e15504e-1ea5-4a00-8278-680066104339",
+                  "title": "to dos",
+                  "description": "<p><strong>Mô tả nhiêm vụ</strong></p><p>1.&nbsp;</p><p>2.&nbsp;</p>",
+                  "status": "pending",
+                  "due_date": "",
+                  "create_at": "Tue Oct 14 2025 17:32:04 GMT+0700 (Indochina Time)",
+                  "tags": [
+                    {
+                      "id": "9a7dc864-1844-499f-a165-8afb0096db9f",
+                      "content": "new label",
+                      "color": "#FFD5D2",
+                      "status": "unchoose"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1",
+          "title": "Dự án Website Bán Hàng",
+          "description": "Theo dõi tiến độ phát triển, thiết kế và kiểm thử hệ thống website thương mại điện tử.",
+          "backdrop": {
+            "id": "2",
+            "type": "image",
+            "bgImage": "/images/mockImage2.jpg"
+          },
+          "is_create": "2025-02-28T12:30:00Z",
+          "is_starred": false,
+          "is_closed": false,
+          "lists": [
+            {
+              "id": "8f36730e-4a3e-4320-9462-714df9fa70c0",
+              "title": "Thiết kế giao diện người dùng",
+              "create_at": "Wed Oct 08 2025 23:00:03 GMT+0700 (Indochina Time)",
+              "tasks": []
+            },
+            {
+              "id": "03665b07-68ba-4743-822c-db48f8dffde8",
+              "title": "Tích hợp hệ thống thanh toán",
+              "create_at": "Wed Oct 08 2025 23:00:57 GMT+0700 (Indochina Time)",
+              "tasks": []
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "title": "Ứng dụng du lịch biển",
+          "description": "Phát triển ứng dụng mobile hỗ trợ đặt tour và khách sạn ven biển.",
+          "backdrop": {
+            "id": "3",
+            "type": "image",
+            "bgImage": "/images/mockImage3.jpg"
+          },
+          "is_create": "2025-03-01T09:15:00Z",
+          "is_starred": true,
+          "is_closed": false,
+          "lists": []
+        },
+        {
+          "id": "3",
+          "title": "Hệ thống HR",
+          "description": "Xây dựng nền tảng quản lý hồ sơ và chấm công nhân viên.",
+          "backdrop": {
+            "id": "8",
+            "type": "gradient",
+            "bgImage": "linear-gradient(to right bottom, #00FFE5, #004BFA)"
+          },
+          "is_create": "2025-03-02T14:45:00Z",
+          "is_starred": false,
+          "is_closed": false,
+          "lists": [
+            {
+              "id": "175a2459-9f81-4222-8594-30ea1f149069",
+              "title": "Danh sách nhiệm vụ chính",
+              "create_at": "Wed Oct 08 2025 19:57:13 GMT+0700 (Indochina Time)",
+              "tasks": [
+                {
+                  "id": "6f11f067-b9f1-4aec-a0b1-ad6cd91ae22b",
+                  "title": "tối ưuu",
+                  "description": "",
+                  "status": "completed",
+                  "due_date": "",
+                  "create_at": "Tue Oct 14 2025 18:34:42 GMT+0700 (Indochina Time)",
+                  "tags": []
+                },
+                {
+                  "id": "fee2a348-88df-464d-9eba-2da6fe250db3",
+                  "title": "Tạo module đăng nhập",
+                  "description": "<p>Xây dựng chức năng xác thực tài khoản người dùng.</p>",
+                  "status": "completed",
+                  "due_date": "2025-10-16T17:00:00.000Z",
+                  "create_at": "Tue Oct 14 2025 10:36:32 GMT+0700 (Indochina Time)",
+                  "tags": [
+                    {
+                      "id": "4d99bf45-17d7-4f3d-aca3-69bf076c386c",
+                      "content": "backend",
+                      "color": "#F5CD47",
+                      "status": "unchoose"
+                    }
+                  ]
+                },
+                {
+                  "id": "50743830-2667-4701-ae47-c1305fdbeea1",
+                  "title": "Thiết kế cơ sở dữ liệu",
+                  "description": "<p>Thiết kế bảng, quan hệ và khóa chính/phụ cho hệ thống.</p>",
+                  "status": "pending",
+                  "due_date": "",
+                  "create_at": "Tue Oct 14 2025 09:35:21 GMT+0700 (Indochina Time)",
+                  "tags": [
+                    {
+                      "id": "b35a9979-8944-46bc-aa1f-a4e168e72bec",
+                      "content": "database",
+                      "color": "#FEDEC8",
+                      "status": "unchoose"
+                    },
+                    {
+                      "id": "efb65c8c-df85-490f-898f-df0c52e93ada",
+                      "content": "design",
+                      "color": "#DFD8FD",
+                      "status": "unchoose"
+                    }
+                  ]
+                },
+                {
+                  "id": "7fded866-25a3-481b-8fe1-c20346909076",
+                  "title": "Tối ưu hiệu suất truy vấn",
+                  "description": "<p>Kiểm tra tốc độ truy vấn và tối ưu các chỉ mục.</p>",
+                  "status": "pending",
+                  "due_date": "",
+                  "create_at": "Tue Oct 14 2025 09:35:06 GMT+0700 (Indochina Time)",
+                  "tags": [
+                    {
+                      "id": "47ed14d9-7bd6-4c1c-9e42-ed6a26bfac29",
+                      "content": "new small task",
+                      "color": "#BAF3DB",
+                      "status": "unchoose"
+                    },
+                    {
+                      "id": "d9282230-90a0-4f13-b00e-23da64e6b546",
+                      "content": "performance",
+                      "color": "#FEDEC8",
+                      "status": "unchoose"
+                    },
+                    {
+                      "id": "5179abcb-dfd5-4396-b666-c1c8048b304e",
+                      "content": "database",
+                      "color": "#DFD8FD",
+                      "status": "unchoose"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "5",
+          "title": "Nền tảng Học Trực Tuyến",
+          "description": "Phát triển hệ thống quản lý khóa học và bài giảng online.",
+          "backdrop": {
+            "id": "9",
+            "type": "gradient",
+            "bgImage": "linear-gradient(to right bottom, #FFA200, #EDFA00)"
+          },
+          "is_create": "2025-03-06T16:30:00Z",
+          "is_starred": true,
+          "is_closed": false,
+          "lists": [
+            {
+              "id": "54d46637-c193-4931-8865-2a433c5e29cd",
+              "title": "Phát triển giao diện học viên",
+              "create_at": "Tue Oct 14 2025 08:44:28 GMT+0700 (Indochina Time)",
+              "tasks": [
+                {
+                  "id": "34eb08a6-ca11-4a20-9c7e-9a52fe6df744",
+                  "title": "Xây dựng trang thêm bài giảng",
+                  "description": "<p>Tạo giao diện và xử lý logic thêm bài học mới vào khóa học.</p>",
+                  "status": "pending",
+                  "due_date": "",
+                  "create_at": "Tue Oct 14 2025 11:03:45 GMT+0700 (Indochina Time)",
+                  "tags": []
+                }
+              ]
+            },
+            {
+              "id": "2f43746f-fb41-4eb8-9145-a3dc178a74ee",
+              "title": "Thiết kế chức năng quản trị khóa học",
+              "create_at": "Tue Oct 14 2025 10:43:02 GMT+0700 (Indochina Time)",
+              "tasks": []
+            }
+          ]
+        },
+        {
+          "id": "c8b7df1f-c21a-47eb-9647-221d7ef77f10",
+          "title": "Sự kiện Thả Bóng Bay",
+          "description": "Tổ chức sự kiện truyền thông ngoài trời cho công ty.",
+          "backdrop": {
+            "id": "1",
+            "type": "image",
+            "bgImage": "/images/mockImg1.jpg"
+          },
+          "is_create": "Wed Oct 08 2025 08:06:04 GMT+0700 (Indochina Time)",
+          "is_starred": false,
+          "is_closed": false,
+          "lists": [
+            {
+              "id": "42defd4f-3900-462b-9b49-7482245e0509",
+              "title": "Chuẩn bị vật dụng",
+              "create_at": "Thu Oct 09 2025 08:17:54 GMT+0700 (Indochina Time)",
+              "tasks": [
+                {
+                  "id": "5a9dabef-9f95-45ec-99bb-b9d28ae33e36",
+                  "title": "Mua bóng và dây trang trí",
+                  "description": "<p>Chuẩn bị đầy đủ dụng cụ và vật liệu trang trí cho sự kiện.</p>",
+                  "status": "pending",
+                  "due_date": "",
+                  "create_at": "Thu Oct 09 2025 08:18:00 GMT+0700 (Indochina Time)",
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c4b1316b-57ac-453a-92fe-12fa512b4241",
+      "username": "linthuuu",
+      "email": "linhthu@gmail.com",
+      "password": "linthu123*",
+      "create_at": "Tue Oct 14 2025 22:27:24 GMT+0700 (Indochina Time)",
+      "boards": [
+        {
+          "id": "aa274ff8-1c47-409a-8454-5377a9a716b3",
+          "backdrop": {
+            "id": "1",
+            "type": "image",
+            "bgImage": "/images/mockImg1.jpg"
+          },
+          "title": "Dự án quản lý sự kiện cá nhân",
+          "is_create": "Tue Oct 14 2025 22:28:40 GMT+0700 (Indochina Time)",
+          "is_starred": false,
+          "is_closed": false,
+          "description": "",
+          "lists": [
+            {
+              "id": "0667c82d-4f78-4401-a48a-de377d50617f",
+              "create_at": "Tue Oct 14 2025 22:28:58 GMT+0700 (Indochina Time)",
+              "title": "todolistttt",
+              "tasks": []
+            },
+            {
+              "id": "dcfbeb6e-46e0-457a-808b-cfd52e3f0734",
+              "create_at": "Tue Oct 14 2025 23:10:03 GMT+0700 (Indochina Time)",
+              "title": "new List",
+              "tasks": [
+                {
+                  "id": "31dcfbc9-80d7-4f27-bec1-7b6a79a454f0",
+                  "title": "newww nhe",
+                  "description": "",
+                  "status": "pending",
+                  "due_date": "",
+                  "create_at": "Tue Oct 14 2025 23:12:34 GMT+0700 (Indochina Time)",
+                  "tags": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e9579562-c5ef-4a3d-a576-2462aa26f0f4",
+      "username": "NguyenVanA",
+      "email": "nva@gmail.com",
+      "password": "12345678*",
+      "create_at": "Wed Oct 15 2025 08:54:55 GMT+0700 (Indochina Time)",
+      "boards": [
+        {
+          "id": "cf70944d-8d4e-4a7e-865c-79b488c4a59b",
+          "backdrop": {
+            "id": "2",
+            "type": "image",
+            "bgImage": "/images/mockImage2.jpg"
+          },
+          "title": "board 2",
+          "is_create": "Wed Oct 15 2025 08:58:10 GMT+0700 (Indochina Time)",
+          "is_starred": true,
+          "is_closed": false,
+          "description": "",
+          "lists": []
+        },
+        {
+          "id": "8ab6eff5-3588-42cd-93ca-68f6e59a8236",
+          "backdrop": {
+            "id": "1",
+            "type": "image",
+            "bgImage": "/images/mockImg1.jpg"
+          },
+          "title": "new board edited",
+          "is_create": "Wed Oct 15 2025 08:56:39 GMT+0700 (Indochina Time)",
+          "is_starred": false,
+          "is_closed": false,
+          "description": "",
+          "lists": [
+            {
+              "id": "e3154c56-67e7-4cee-8792-073b997e483f",
+              "create_at": "Wed Oct 15 2025 09:00:27 GMT+0700 (Indochina Time)",
+              "title": "new list",
+              "tasks": []
+            },
+            {
+              "id": "45fe6ad7-73d9-4c79-946f-f48dd3b85b4b",
+              "create_at": "Wed Oct 15 2025 09:00:45 GMT+0700 (Indochina Time)",
+              "title": "list 2 edit",
+              "tasks": [
+                {
+                  "id": "a5111206-7a01-466d-bd63-864ea263fcb2",
+                  "title": "card 1",
+                  "description": "<p>mo ta</p>",
+                  "status": "completed",
+                  "due_date": "",
+                  "create_at": "Wed Oct 15 2025 09:00:34 GMT+0700 (Indochina Time)",
+                  "tags": [
+                    {
+                      "id": "0647d1e0-d6c7-4fa4-9b00-618594db8346",
+                      "content": "new label 2",
+                      "color": "#BAF3DB",
+                      "status": "choose"
+                    },
+                    {
+                      "id": "c1d6a6f7-6f98-43e9-9cb6-98bfa89ced0e",
+                      "content": "new label",
+                      "color": "#FEDEC8",
+                      "status": "choose"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9415ed29-e9b0-49b4-bb48-cf9492d90630",
+      "username": "ppanh_876",
+      "email": "ppanh123@gmail.com",
+      "password": "12345678*",
+      "create_at": "Wed Oct 15 2025 10:33:11 GMT+0700 (Indochina Time)",
+      "boards": []
+    }
+  ]
+}
