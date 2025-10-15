@@ -9,6 +9,15 @@ import type { NotificationPlacement } from "antd/es/notification/interface";
 import type { User } from "../interfaces/board.interface";
 import { useAppDispatch, useAppSelector } from "../redux/reducHook/useHooks";
 import { addNewUser, getAllUser } from "../apis/user.data";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export default function Register() {
   const dispatch = useAppDispatch();
@@ -24,6 +33,22 @@ export default function Register() {
   useEffect(() => {
     dispatch(getAllUser());
   }, [dispatch]);
+
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
+  const handleMouseUpPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
   const showAlert = (
     placement: NotificationPlacement,
@@ -74,7 +99,10 @@ export default function Register() {
     }
     if (!inputEmail) {
       inform.push("Email người dùng không để trống");
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail) || !inputEmail.includes("@gmail")) {
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail) ||
+      !inputEmail.includes("@gmail")
+    ) {
       inform.push("Email không đúng định dạng");
     } else if (emailExist) {
       inform.push("Email đã tồn tại");
@@ -122,7 +150,7 @@ export default function Register() {
           <h1 className="text-[26px] text-[#212529] self-start">
             Please sign up
           </h1>
-          <div className="w-[100%] flex flex-col gap-3">
+          <div className="w-[100%] flex flex-col gap-3 justify-center">
             <TextField
               onChange={handleInputSignUp}
               name="email"
@@ -131,21 +159,41 @@ export default function Register() {
               variant="outlined"
             />
             <TextField
-            
               onChange={handleInputSignUp}
               name="username"
               id="outlined-basic"
               label="Username"
               variant="outlined"
             />
-            <TextField
+            <FormControl sx={{ width: "100%" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
               onChange={handleInputSignUp}
-              name="password"
-              type="password"
-              id="outlined-basic"
-              label="Password"
-              variant="outlined"
-            />
+                id="outlined-adornment-password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label={
+                        showPassword
+                          ? "hide the password"
+                          : "display the password"
+                      }
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      onMouseUp={handleMouseUpPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
           </div>
 
           <div>

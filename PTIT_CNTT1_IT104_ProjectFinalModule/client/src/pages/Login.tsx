@@ -9,6 +9,15 @@ import { notification } from "antd";
 import type { NotificationPlacement } from "antd/es/notification/interface";
 import type { User } from "../interfaces/board.interface";
 import { getAllUser } from "../apis/user.data";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from "@mui/material";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
 
 export default function Register() {
   const dispatch = useAppDispatch();
@@ -20,7 +29,9 @@ export default function Register() {
   const [rememberInfo, setRememberInfo] = useState<boolean>(false);
   type NotificationType = "success" | "info" | "warning" | "error";
   const [api, contextHolder] = notification.useNotification();
-  const [inputEmail, setInputEmail] = useState<string>( userLoggined ? userLoggined.email : "");
+  const [inputEmail, setInputEmail] = useState<string>(
+    userLoggined ? userLoggined.email : ""
+  );
   const [inputPassword, setInputPassword] = useState<string>(
     userLoggined ? userLoggined.password : ""
   );
@@ -37,6 +48,22 @@ export default function Register() {
       setInputPassword(dataParsed.password);
     }
   }, []);
+
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
+  const handleMouseUpPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
   const showAlert = (
     placement: NotificationPlacement,
@@ -90,8 +117,8 @@ export default function Register() {
     }
     if (!inputPassword) {
       inform.push("Mật khẩu không để trống");
-    }else if(inputPassword !== userExist?.password){
-      inform.push("Mật khẩu không chính xác")
+    } else if (inputPassword !== userExist?.password) {
+      inform.push("Mật khẩu không chính xác");
     }
     if (inform.length === 0) {
       localStorage.setItem(
@@ -101,7 +128,7 @@ export default function Register() {
       localStorage.setItem("userLoggined", JSON.stringify(userExist));
       showAlert("topRight", "success", ["Đăng nhập thành công"]);
       setTimeout(() => {
-        navigate(`/${userExist?.id}`, {replace:true});
+        navigate(`/${userExist?.id}`, { replace: true });
       }, 1200);
     } else {
       showAlert("topRight", "error", inform);
@@ -133,15 +160,35 @@ export default function Register() {
               variant="outlined"
               name="email"
             />
-            <TextField
-              value={inputPassword}
-              onChange={handleInputLogin}
-              id="outlined-basic"
-              label="Password"
-              variant="outlined"
-              name="password"
-              type="password"
-            />
+            <FormControl sx={{ width: "100%" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                onChange={handleInputLogin}
+                id="outlined-adornment-password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label={
+                        showPassword
+                          ? "hide the password"
+                          : "display the password"
+                      }
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      onMouseUp={handleMouseUpPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
           </div>
           <div className="flex items-center">
             <Checkbox onChange={rememberLogin} {...label} />
